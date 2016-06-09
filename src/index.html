@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width ,initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <title>Uber-UEFA</title>
+  </head>
+  <body>
+    <div id="alert-box-container" class="alert-box-container display-none">
+      <div class="alert-box">
+        <div id="alert-box-content" class="alert-box-content"></div>
+        <button id="alert-box-button" class="alert-box-button">确定</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <section class="page page1">
+        <div class="border">
+          <div class="content">
+            <div>
+              <div class="content-logo"></div>
+              <div class="content-football"></div>
+              <p class="content-title">优步百万竞猜<br />欧洲杯揭幕战</p>
+              <p class="content-time">6月11日 3:00</p>
+            </div>
+            <div class="flags">
+              <img src="./images/french.png" alt="主队国旗" id="flag1" class="flag"></img>
+              <img src="./images/romania.png" alt="客队国旗" id="flag2" class="flag"></img>
+            </div>
+            <div class="vote-container">
+              <div>
+                <button id="vote-button-1" class="vote-button">支持法国</button>
+                <div class="vote-status">
+                  <p>已有</p>
+                  <div id="vote-number-country-1" class="vote-number">0</div>
+                  <p>U粉支持</p>
+                </div>
+              </div>
+              <div>
+                <button id="vote-button-2" class="vote-button">支持罗马尼亚</button>
+                <div class="vote-status">
+                  <p>已有</p>
+                  <div id="vote-number-country-2" class="vote-number">0</div>
+                  <p>U粉支持</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page page2">
+        <div class="content-top">
+          <div class="content-logo"></div>
+          <div class="content-character"></div>
+        </div>
+        <p class="content-phoneNumber">输入优步手机号</p>
+        <form>
+          <input type="text" />
+          <button id="confirm">确定</button>
+        </form>
+        <p class="content-line content-line-1">立即参与有奖竞猜</p>
+        <p class="content-line content-line-2">优步福利专属福利</p>
+        <div class="content-register-container">
+          <a href="https://get.uber.com.cn/envelope/我爱优步青岛/"><button class="content-register">点击注册</button></a>
+        </div>
+        <p class="content-line content-line-3">成为优步用户享首乘30元</p>
+      </section>
+
+      <section class="page page3">
+        <div class="content-top">
+          <div class="content-logo"></div>
+          <div class="content-character"></div>
+        </div>
+        <p class="content-congrats">参与成功！</p>
+        <form>
+          <input type="text" />
+          <button id="copy">复制</button>
+        </form>
+        <p class="content-line content-line-1">点击复制分享</p>
+        <p class="content-line content-line-2">为你喜爱的球队助力</p>
+        <div class="content-girls">
+          <div class="content-girl-1"></div>
+          <div class="content-girl-2"></div>
+        </div>
+      </section>
+    </div>
+
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+  </body>
+</html>

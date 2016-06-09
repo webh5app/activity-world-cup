@@ -1,0 +1,424 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+$font-stack: helvetica, sans-serif;
+
+body {
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  // transition: transform 1s ease;
+  // overflow: hidden;
+
+  .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page1 {
+    left: 0;
+    background-image: url(../images/background.png);
+    background-size: contain;
+    z-index: 0;
+
+    .border {
+      width: 100%;
+      height: 100%;
+      background-image: url(../images/football-frame-4.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .content-logo {
+        position: absolute;
+        top: 6%;
+        left: 8%;
+        width: 77px;
+        height: 77px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-football {
+        position: absolute;
+        top: 6%;
+        right: 8%;
+        width: 80px;
+        height: 77px;
+        background-image: url(../images/football.png);
+        background-size: cover;
+      }
+
+      .content-title {
+        position: absolute;
+        width: 100%;
+        top: 22%;
+        font-size: 30px;
+        color: #ffff13;
+        text-align: center;
+        // border: 1px solid black;
+      }
+
+      .content-time {
+        position: absolute;
+        width: 100%;
+        top: 35%;
+        font-size: 22px;
+        color: #fff;
+        text-align: center;
+        // border: 1px solid black;
+      }
+
+      .flags {
+        width: 100vw;
+        height: 150px;
+        // position: relative;
+        box-sizing: border-box;
+        // flex-basis: auto;
+        // align-self: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        // border: 1px solid red;
+      }
+
+      .flag {
+        width: 100px;
+        height: 67px;
+      }
+
+      .vote-container {
+        width: 100%;
+        height: 150px;
+        position: absolute;
+        // border: 1px solid black;
+        display: flex;
+        justify-content: space-around;
+        font-family: $font-stack;
+
+        .vote-button {
+          width: 100px;
+          height: 30px;
+          background-color: #fff;
+          border: 0;
+          border-radius: 10px;
+          color: #4821c0;
+          font-size: 13px;
+          letter-spacing: 0.5px;
+        }
+        .vote-status {
+          line-height: 35px;
+          margin-top: 20px;
+          text-align: center;
+          font-size: 16px;
+          color: #fff;
+
+          .vote-number {
+            width: 80px;
+            height: 28px;
+            margin: auto;
+            background-color: rgb(255, 254, 20);
+            border-radius: 10px;
+            color: black;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+  }
+
+  .page2 {
+    left: 100%;
+    background-color: rgb(3, 178, 23);
+    background-image: url(../images/football-frame-3.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    .content-top {
+      width: 100%;
+      height: 25%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .content-logo {
+        width: 73px;
+        height: 73px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-character {
+        width: 47px;
+        height: 74px;
+        background-image: url(../images/boy.png);
+        background-size: cover;
+      }
+    }
+
+    .content-phoneNumber {
+      width: 250px;
+      height: 30px;
+      margin: auto;
+      font-family: $font-stack;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    form {
+      width: 250px;
+      height: 50px;
+      margin: auto;
+
+      input {
+        width: 172px;
+        height: 43px;
+        padding: 5px;
+        font-family: $font-stack;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+
+      button {
+        width: 56px;
+        height: 43px;
+        margin-left: 15px;
+        background-color: rgb(247, 247, 99);
+        border: 0;
+        font-family: $font-stack;
+        font-size: 18px;
+        color: rgb(3, 178, 23);
+      }
+    }
+
+    .content-line {
+      width: 260px;
+      height: 50px;
+      margin: auto;
+      line-height: 50px;
+      font-family: $font-stack;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .content-line-1 {
+      font-size: 25px;
+      color: rgb(247, 247, 99);
+    }
+
+    .content-line-2 {
+      font-size: 25px;
+      color: #fff;
+    }
+
+    .content-register-container {
+      width: 130px;
+      height: 43px;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    .content-register {
+      width: 130px;
+      height: 43px;
+      margin: auto;
+      background-color: rgb(247, 247, 99);
+      border: 0;
+      font-family: $font-stack;
+      font-size: 20px;
+      color: rgb(3, 178, 23);
+    }
+
+    .content-line-3 {
+      font-size: 20px;
+      color: #fff;
+      margin-top: 10px;
+    }
+  }
+  .page3 {
+    left: 200%;
+    background-color: rgb(3, 178, 23);
+    background-image: url(../images/football-frame-5.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    .content-top {
+      width: 82%;
+      height: 19%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .content-logo {
+        width: 73px;
+        height: 73px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-character {
+        width: 140px;
+        height: 85px;
+        background-image: url(../images/boy-with-ball-2.png);
+        background-size: cover;
+      }
+    }
+
+    form {
+      width: 220px;
+      height: 40px;
+      margin: auto;
+
+      input {
+        width: 150px;
+        height: 35px;
+        padding: 5px;
+        font-family: $font-stack;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+
+      button {
+        width: 50px;
+        height: 35px;
+        margin-left: 15px;
+        background-color: rgb(247, 247, 99);
+        border: 0;
+        font-family: $font-stack;
+        font-size: 18px;
+        color: rgb(3, 178, 23);
+      }
+    }
+
+    .content-congrats {
+      width: 230px;
+      height: 56px;
+      margin: auto;
+      margin-top: 20px;
+      font-family: $font-stack;
+      font-size: 36px;
+      font-weight: bold;
+      color: #f7f763;
+      text-align: center;
+    }
+
+    .content-line {
+      width: 230px;
+      height: 40px;
+      margin: auto;
+      font-family: $font-stack;
+      font-size: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .content-line-1 {
+      margin-top: 43%;
+    }
+    @media screen and (min-width: 400px) {
+      .content-line-1 {
+        margin-top: 50%;
+      }
+    }
+
+    .content-girls {
+      width: 85%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .content-girl-1 {
+        width: 60px;
+        height: 120px;
+        background-image: url(../images/girl-1.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .content-girl-2 {
+        width: 52px;
+        height: 115px;
+        background-image: url(../images/girl-2.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+}
+
+.alert-box-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px sloid red;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.48);
+}
+
+.alert-box {
+  position: relative;
+  width: 250px;
+  height: 180px;
+  margin: auto auto;
+  background-color: #fff;
+  border-radius: 3px;
+  z-index: 2;
+}
+
+.alert-box-content {
+  width: 100%;
+  height: 130px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: $font-stack;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #3498DB;
+  padding-top: 50px;
+
+}
+
+.alert-box-button {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: none;
+  border-top: 1px solid #e1e1e1;
+  font-size: 20px;
+  font-family: $font-stack;
+  letter-spacing: 2px;
+  color: #3498DB;
+}
+
+.display-none {
+  display: none;
+}
+
+.transfer1 {
+  transform: translateX(-100%);
+}
+
+.transfer2 {
+  transform: translateX(-200%);
+}
