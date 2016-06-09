@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 $font-stack: helvetica, sans-serif;
 
@@ -25,14 +26,14 @@ body {
 
   .page1 {
     left: 0;
-    background-image: url(../images/background.png);
+    background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/background.png);
     background-size: contain;
     z-index: 0;
 
     .border {
       width: 100%;
       height: 100%;
-      background-image: url(../images/football-frame-4.png);
+      background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/football-frame-4.png);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center center;
@@ -47,7 +48,7 @@ body {
         left: 8%;
         width: 77px;
         height: 77px;
-        background-image: url(../images/logo.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/logo.png);
         background-size: cover;
       }
 
@@ -57,7 +58,7 @@ body {
         right: 8%;
         width: 80px;
         height: 77px;
-        background-image: url(../images/football.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/football.png);
         background-size: cover;
       }
 
@@ -142,7 +143,7 @@ body {
   .page2 {
     left: 100%;
     background-color: rgb(3, 178, 23);
-    background-image: url(../images/football-frame-3.png);
+    background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/football-frame-3.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -157,14 +158,14 @@ body {
       .content-logo {
         width: 73px;
         height: 73px;
-        background-image: url(../images/logo.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/logo.png);
         background-size: cover;
       }
 
       .content-character {
         width: 47px;
         height: 74px;
-        background-image: url(../images/boy.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/boy.png);
         background-size: cover;
       }
     }
@@ -252,7 +253,7 @@ body {
   .page3 {
     left: 200%;
     background-color: rgb(3, 178, 23);
-    background-image: url(../images/football-frame-5.png);
+    background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/football-frame-5.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -268,14 +269,14 @@ body {
       .content-logo {
         width: 73px;
         height: 73px;
-        background-image: url(../images/logo.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/logo.png);
         background-size: cover;
       }
 
       .content-character {
         width: 140px;
         height: 85px;
-        background-image: url(../images/boy-with-ball-2.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/boy-with-ball-2.png);
         background-size: cover;
       }
     }
@@ -348,7 +349,7 @@ body {
       .content-girl-1 {
         width: 60px;
         height: 120px;
-        background-image: url(../images/girl-1.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/girl-1.png);
         background-repeat: no-repeat;
         background-size: contain;
       }
@@ -356,7 +357,7 @@ body {
       .content-girl-2 {
         width: 52px;
         height: 115px;
-        background-image: url(../images/girl-2.png);
+        background-image: url(http://o82r0gv7d.bkt.clouddn.com/images/girl-2.png);
         background-repeat: no-repeat;
         background-size: contain;
       }
@@ -422,3 +423,57 @@ body {
 .transfer2 {
   transform: translateX(-200%);
 }
+
+#process-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+#process-container.toggled {
+  display: block;
+}
+
+#process {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#process-item-wrapper {
+  width: 6rem;
+  height: 6rem;
+  padding: 2rem;
+  color: white;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.48);
+  background-color: rgba(0,0,0,0.72);
+}
+
+#process-item {
+  width: 2rem;
+  height: 2rem;
+}
+
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+.rotate {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
