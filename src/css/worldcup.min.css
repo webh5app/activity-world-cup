@@ -250,28 +250,20 @@ body {
   background-size: cover;
 }
 .container .page3 form {
-  width: 220px;
+  width: 160px;
   height: 40px;
   margin: auto;
 }
 .container .page3 form input {
-  width: 150px;
+  width: 160px;
   height: 35px;
   padding: 5px;
   font-family: helvetica, sans-serif;
   font-size: 18px;
   text-align: center;
   letter-spacing: 1px;
-}
-.container .page3 form button {
-  width: 50px;
-  height: 35px;
-  margin-left: 15px;
-  background-color: #f7f763;
-  border: 0;
-  font-family: helvetica, sans-serif;
-  font-size: 18px;
-  color: #03b217;
+  border: none;
+  border-radius: 3px;
 }
 .container .page3 .content-congrats {
   width: 230px;
@@ -285,7 +277,7 @@ body {
   text-align: center;
 }
 .container .page3 .content-line {
-  width: 230px;
+  width: 260px;
   height: 40px;
   margin: auto;
   font-family: helvetica, sans-serif;

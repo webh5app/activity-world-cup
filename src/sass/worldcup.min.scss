@@ -291,30 +291,32 @@ body {
     }
 
     form {
-      width: 220px;
+      width: 160px;
       height: 40px;
       margin: auto;
 
       input {
-        width: 150px;
+        width: 160px;
         height: 35px;
         padding: 5px;
         font-family: $font-stack;
         font-size: 18px;
         text-align: center;
         letter-spacing: 1px;
+        border: none;
+        border-radius: 3px;
       }
 
-      button {
-        width: 50px;
-        height: 35px;
-        margin-left: 15px;
-        background-color: rgb(247, 247, 99);
-        border: 0;
-        font-family: $font-stack;
-        font-size: 18px;
-        color: rgb(3, 178, 23);
-      }
+      // button {
+      //   width: 50px;
+      //   height: 35px;
+      //   margin-left: 15px;
+      //   background-color: rgb(247, 247, 99);
+      //   border: 0;
+      //   font-family: $font-stack;
+      //   font-size: 18px;
+      //   color: rgb(3, 178, 23);
+      // }
     }
 
     .content-congrats {
@@ -330,7 +332,7 @@ body {
     }
 
     .content-line {
-      width: 230px;
+      width: 260px;
       height: 40px;
       margin: auto;
       font-family: $font-stack;
