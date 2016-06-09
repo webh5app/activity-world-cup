@@ -9,7 +9,7 @@ var path         = require('path'),
     concatCss    = require('gulp-concat-css'), // concat css
     cleanCss     = require('gulp-clean-css'), // compress css
     sourcemaps   = require('gulp-sourcemaps'), // js blank
-    // imagemin     = require('gulp-imagemin'), // compress images
+    imagemin     = require('gulp-imagemin'), // compress images
     babel        = require('gulp-babel'), //
     notify       = require('gulp-notify'), // notify info
     // watch     = require('gulp-watch'), //
@@ -89,7 +89,7 @@ var Compile = function (file) {
           },
           image: function compileImage (filePath, buildPath) {
             gulp.src(filePath)
-                // .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
+                .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
                 .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'images')))
                 .pipe(livereload());
           },
@@ -121,7 +121,7 @@ gulp.task('webserver', function () {
 
   var stream = gulp.src('./build')
         .pipe(webserver({
-            // host: '0.0.0.0',
+            host: '0.0.0.0',
             port: 8080,
             path: '/',
             livereload: true,
@@ -198,7 +198,7 @@ gulp.task('cleanCss', function () {
 // build image
 gulp.task('imagemin', function () {
     gulp.src(path.join(SOURCE_DIR, 'images/**/*'))
-        // .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
         .pipe(gulp.dest(path.join(BUILD_DIR, 'images')))
         .pipe(livereload());
 });
