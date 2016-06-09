@@ -1,0 +1,382 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+$font-stack: helvetica, sans-serif;
+
+body {
+  position: relative;
+  overflow: hidden;
+  font-family: $font-stack;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  // transition: transform 1s ease;
+  // overflow: hidden;
+
+  .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page1 {
+    left: 0;
+    background-image: url(../images/background.png);
+    background-size: contain;
+    z-index: 0;
+
+    .border {
+      width: 100%;
+      height: 100%;
+      background-image: url(../images/football-frame-4.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+
+      .content-logo {
+        position: absolute;
+        top: 6%;
+        left: 8%;
+        width: 77px;
+        height: 77px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-football {
+        position: absolute;
+        top: 6%;
+        right: 8%;
+        width: 80px;
+        height: 77px;
+        background-image: url(../images/football.png);
+        background-size: cover;
+      }
+
+      .content-title {
+        position: absolute;
+        width: 100%;
+        top: 22%;
+        font-size: 30px;
+        color: #ffff13;
+        text-align: center;
+        // border: 1px solid black;
+      }
+
+      .content-time {
+        position: absolute;
+        width: 100%;
+        top: 35%;
+        font-size: 22px;
+        color: #fff;
+        text-align: center;
+        // border: 1px solid black;
+      }
+
+      .flags {
+        width: 100vw;
+        height: 150px;
+        // position: relative;
+        box-sizing: border-box;
+        // flex-basis: auto;
+        // align-self: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        // border: 1px solid red;
+      }
+
+      .flag {
+        width: 100px;
+        height: 67px;
+        background-size: cover;
+        // margin: -50%;
+      }
+
+      .flag1 {
+        background-image: url(../images/french.png);
+      }
+      .flag2 {
+        background-image: url(../images/romania.png);
+      }
+
+      .vote-container {
+        width: 100%;
+        height: 150px;
+        position: absolute;
+        // border: 1px solid black;
+        display: flex;
+        justify-content: space-around;
+        font-family: $font-stack;
+
+        .vote-button {
+          width: 100px;
+          height: 30px;
+          background-color: #fff;
+          border: 0;
+          border-radius: 10px;
+          color: #4821c0;
+          font-size: 13px;
+          letter-spacing: 0.5px;
+        }
+        .vote-status {
+          line-height: 35px;
+          margin-top: 20px;
+          text-align: center;
+          font-size: 16px;
+          color: #fff;
+
+          .vote-number-f, .vote-number-r{
+            width: 100px;
+            height: 30px;
+            background-color: rgb(255, 254, 20);
+            border-radius: 10px;
+            color: 4821C0;
+          }
+        }
+      }
+    }
+  }
+
+  .page2 {
+    left: 100%;
+    background-image: url(../images/background.png);
+    background-size: contain;
+    z-index: 0;
+
+    .border {
+      width: 100%;
+      height: 100%;
+      background-image: url(../images/football-frame-3.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      .content-logo {
+        position: absolute;
+        top: 6%;
+        left: 8%;
+        width: 77px;
+        height: 77px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-football {
+        position: absolute;
+        top: 1%;
+        right: 8%;
+        width: 80px;
+        height: 20%;
+        background-image: url(../images/boy.png);
+        background-size: cover;
+      }
+      .phone-info{
+        position: absolute;
+        top: 25%;
+        width: 80%;
+        font-size: 27px;
+        color: #ffffff;
+        text-align: center;
+      }
+
+      .line1 {
+        width: 100%;
+        font-size: 33px;
+        color: #ffff13;
+        margin-top: 5%;
+        text-align: center;
+      }
+
+      .line2 {
+        width: 100%;
+        font-size: 33px;
+        color: #ffffff;
+        margin-bottom: 5%;
+        margin-top: 5%;
+        text-align: center;
+      }
+
+      .line3 {
+        width: 100%;
+        font-size: 27px;
+        color: #ffffff;
+        margin-button: 5%;
+      }
+      .phone-form {
+        position: absolute;
+        top: 32%;
+        left: 25%;
+        width: 50%;
+        .phone-content {
+          width: 65%;
+          height: 33.6px;
+        }
+        .confirm-button {
+          color: green;
+          background-color: F7F763; 
+          width: 30%;
+          height: 33.6px;
+          left: 5%;
+          font-size: 16px;
+          border: none;
+        }
+      }
+    }
+
+    .content {
+      top: 55%;
+      height: 25%;
+    }
+    .register button {
+      margin-bottom: 5%;
+      margin-left: 30%;
+      color: green;
+          background-color: F7F763; 
+          width: 30%;
+          left: 35%;
+          height: 33.6px;
+          font-size: 16px;
+          border: none;
+    }
+
+  }
+  .page3 {
+    left: 200%;
+    background-image: url(../images/background.png);
+    background-size: contain;
+    z-index: 0;
+
+    .border {
+      width: 100%;
+      height: 100%;
+      background-image: url(../images/football-frame-5.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      .content-top {
+        width: 100%;
+        height: 40%;
+      }
+      .content-logo {
+        position: absolute;
+        top: 6%;
+        left: 8%;
+        width: 77px;
+        height: 77px;
+        background-image: url(../images/logo.png);
+        background-size: cover;
+      }
+
+      .content-boyfootball {
+        position: absolute;
+        top: 4%;
+        right: 4%;
+        width: 150px;
+        height: 107px;
+        background-image: url(../images/boy-with-ball.png);
+        background-size: cover;
+        // background-color: red;
+      }
+
+      .content-title {
+        position: absolute;
+        width: 100%;
+        top: 22%;
+        font-size: 30px;
+        color: #ffff13;
+        text-align: center;
+        font-size: 36px;
+        // background-color: red;
+        // border: 1px solid black;
+      }
+      .share-form {
+        position: absolute;
+        top: 32%;
+        left: 25%;
+        width: 50%;
+        .share-content {
+          width: 65%;
+          height: 33.6px;
+        }
+        .copy-button {
+          color: green;
+          background-color: F7F763; 
+          width: 30%;
+          height: 33.6px;
+          left: 5%;
+          font-size: 16px;
+          border: none;
+        }
+      }
+      .football {
+        width: 50%;
+        left: 40%; 
+        height: 22%; 
+        // z-index: 100;
+      }
+      .share-info {
+        color: #ffffff;
+        text-align: center;
+        // margin-top: 58%;
+        font-size: 20px;
+        height: 80px;
+        // background-color: green;
+      }
+      .chearleaders {
+        // background-color: red;
+        width: 100vw;
+        height: 20%;
+        // position: relative;
+        // box-sizing: border-box;
+        // flex-basis: auto;
+        // align-self: auto;
+        display: flex;
+        // margin-top: 100px;
+        justify-content: space-around;
+        // border: 1px solid red;
+        align-items: flex-end;
+        // padding-left: 20px;
+      }
+      .chearleader {
+        // background-color: green;
+        width: 100px;
+        height: 170px;
+        background-size: cover;
+        &.left-chearleader {
+          background-image: url(../images/girl.png);
+        }
+        &.right-chearleader {
+          background-image: url(../images/girl-2.png);
+        }
+      }
+    }
+  }
+}
+
+.transfer1 {
+  transform: translateX(-100%);
+}
+
+.transfer2 {
+  transform: translateX(-200%);
+}
