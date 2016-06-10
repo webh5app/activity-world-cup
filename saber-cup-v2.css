@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url('./images/background.png');
+  background-image: url('http://o82r0gv7d.bkt.clouddn.com/images/background.png');
   background-position: center;
   background-size: cover;
 }
@@ -70,11 +70,11 @@ body {
 }
 
 #vote-french .vote-card {
-  margin-right: 19%;
+  margin-right: 17%;
 }
 
 #vote-romania .vote-card {
-  margin-left: 19%;
+  margin-left: 17%;
 }
 
 #vote-french img,
@@ -245,7 +245,7 @@ body {
 
 /* 加载指示器 */
 #process-container {
-  display: block;
+  display: none;
 }
 
 #process {

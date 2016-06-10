@@ -1,5 +1,9 @@
 ;(function($) {
-  var api_url = "http://www.uberqd.com/api/v1/activity/worldcup/38550e68-b2fd-46ab-9176-202b15f723fd/";
+  var prefix = '';
+  var path = "/api/v1/activity/worldcup";
+  var uuid = location.pathname.split('/')[3];
+  var api_url = prefix + path + '/' + uuid + '/';
+
   var server_data;
   var flag;
 
@@ -16,7 +20,7 @@
 
     ajaxGet(api_url, function(data) {
       server_data = data;
-      $('#french-number').text(parseInt(server_data.host.vote * 2.2));
+      $('#french-number').text(parseInt(server_data.host.vote));
       $('#romania-number').text(parseInt(server_data.guest.vote));
       $('#share-input').val(server_data.short_url)
     }, function() {
@@ -28,10 +32,13 @@
     // 监控图片加载
     togglePage('#process-container', 'on');
     var _image = document.createElement('img');
-    _image.src= "./images/background.png";
+    _image.src= "http://o82r0gv7d.bkt.clouddn.com/images/background.png";
     _image.onload = function () {
       togglePage('#process-container', 'off');
     };
+    if (_image.complete) {
+        togglePage('#process-container', 'off');
+    }
   }
 
   // @status: on 触发 off 关闭
@@ -105,13 +112,14 @@
       return;
     }
 
-    // 打开加载 tips
-    togglePage('#process-container', 'on');
+    
     if (!phone_regex.test(phone)) {
       // 打开错误提示
       label.text('手机号输入错误');
       label.css('color', 'red')
     } else {
+      // 打开加载 tips
+      togglePage('#process-container', 'on');
       ajaxPost(api_url, "phone="+phone+"&team="+flag, function(data) {
         if(data.errcode === undefined) {
           togglePage('#process-container', 'off');
