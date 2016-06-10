@@ -3,128 +3,169 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="http://o82r0gv7d.bkt.clouddn.com/images/css/saber-cup.css" >
+    <link rel="stylesheet" href="./index.css" >
     <title>优步百万竞猜 欧洲杯揭幕战</title>
+
   </head>
   <body>
-  <div id="page-container">
+    <!-- 填充线框图 -->
+    <div id="frame">
+      <img id="frame-img" src="./images/frame.png" />
+    </div>
 
-    <!-- 第一页 -->
-    <section id="page-1" class="page">
-      <img src="http://o82r0gv7d.bkt.clouddn.com/images/football-frame-4.png" />
-      <div id="page-1-header">
-        <div class="page-1-header--item">
-          <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/logo.png" />
-          <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/football.png" />
+    <!-- 页面 - 第一页 -->
+    <section id="page-1" class="page page-active">
+      <div class="page-block clearfix">
+        <div class="left"><img class="block-shadow" width="54" height="54" src="./images/logo.png" /></div>
+        <div class="right"><img  height="54" src="./images/boy.png" /></div>
+      </div>
+      <div class="page-block card">
+        <div id="header-title">
+          <span class="header-1">
+            优步百万竞猜<br />
+            欧洲杯揭幕战
+          </span>
         </div>
-        <div class="page-1-header--item header-head">
-          优步百万竞猜<br>
-          欧洲杯揭幕战
-        </div>
-        <div class="page-1-header--item header-time">
-          6月11日 3:00
+        <div id="start-time">
+          <span class="time">
+            6月11日 3:00
+          </span>
         </div>
       </div>
-      <div id="flags">
-        <section class="flag">
-          <div class="flag-item">
-            <img width="100" src="http://o82r0gv7d.bkt.clouddn.com/images/french.png" />
+      <div id="vote" class="page-block grid">
+        <div id="vote-french" class="grid-50">
+          <div class="vote-card">
+            <img class="vote-flags" src="./images/french.png" />
+            <div class="vote-name">法国队</div>
+            <div class="vote-button">
+              <div class="float-button">点我投票</div>
+            </div>
           </div>
-          <div class="flag-item">
-            <button class="button vote-button" data-name='french'>支持法国队</button>
-          </div>
-          <div class="flag-item vote-status">
-            已有<br>
-            <span class="vote-show button" id="french-show"></span><br>
-            U粉支持
-          </div>
-        </section>
-        <section class="flag">
-          <div class="flag-item">
-            <img width="100" src="http://o82r0gv7d.bkt.clouddn.com/images/romania.png" />
-          </div>
-          <div class="flag-item">
-            <button class="button vote-button" data-name='romania'>支持罗马尼亚队</button>
-          </div>
-          <div class="flag-item vote-status">
-            <div class="flag-item vote-status">
+          <div class="vote-card">
+            <div class="vote-header"> 统计 </div>
+            <div id="french-count" class="vote-count">
               已有<br>
-              <span class="vote-show button" id="romania-show"></span><br>
+              <span id="french-number" class="vote-number">1003</span><br>
               U粉支持
+            </div>
           </div>
+        </div>
+        <div id="vote-romania" class="grid-50">
+          <div class="vote-card">
+            <img class="vote-flags" src="./images/romania.png" />
+            <div class="vote-name">罗马尼亚队</div>
+            <div class="vote-button">
+              <div class="float-button">点我投票</div>
+            </div>
           </div>
-        </section>
+          <div class="vote-card">
+            <div class="vote-header"> 统计 </div>
+            <div id="french-count" class="vote-count">
+              已有<br>
+              <span id="romania-number" class="vote-number">1003</span><br>
+              U粉支持
+            </div>
+          </div>
+        </div>
       </div>
+      <div id="rule" class="page-block">
+        <div class="card">
+          <div class="card-header"> 规则 </div>
+          <div class="card-content">
+            <ul>
+              <li> 1. 若支持的球队获胜，即可平分百万优步乘车金! </li>
+              <li> 2. 详情关注微信: qd_you </li>
+            <ul>
+          </div>
+        </div>
+      </div>
+
     </section>
 
-    <!-- 第二页 -->
+    <!-- 页面 - 第二页 -->
     <section id="page-2" class="page">
-      <img src="http://o82r0gv7d.bkt.clouddn.com/images/football-frame-3.png" />
-      <div id="page-2-wrap">
-        <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/logo.png" />
-        <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/boy.png" />
-        <div id="page-2-content">
-          输入优步手机号<br>
-          <input id="page-2-input" type="text" /><button id="page-2-send">确定</button><br>
-          <span id="page-2-tip">立即参与有奖竞猜</span><br>
-          优步专属福利<br>
-          <button id="page-2-register">点击注册</button><br>
-          成为优步用户享首乘30元
+      <div class="page-block clearfix">
+        <div class="left"><img class="block-shadow" width="54" height="54" src="./images/logo.png" /></div>
+        <div class="right"><img height="54" src="./images/boy.png" /></div>
+      </div>
+      <div class="page-block">
+        <div id="input-panel" class="card">
+          <div class="card-header">确认投票</div>
+          <div class="input-group">
+            <input id="phone-input" type="tel" required>
+            <span class="bar" ></span>
+            <label id="input-label">输入优步手机号</label>
+          </div>
+          <div id="confirm" >
+            <div class="float-button">
+              立即参与有奖竞猜
+            </div>
+          </div>
+          <div id="register">
+            优步专属福利<br>
+            <div class="float-button">点击注册</div><br>
+            成为优步用户享首乘30元
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 第三页 -->
+    <!-- 页面 - 第三页 -->
     <section id="page-3" class="page">
-      <img src="http://o82r0gv7d.bkt.clouddn.com/images/football-frame-3.png" />
-      <div id="page-3-wrap">
-        <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/logo.png" />
-        <img width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/boy.png" />
-        <div id="page-3-content">
-          参与成功<br>
-          <input id="page-3-input" type="text" readonly="readonly"/><button id="page-3-send">复制</button><br>
-          点击复制分享<br>
-          为你喜爱的球队助力
+      <div class="page-block clearfix">
+        <div class="left"><img class="block-shadow" width="54" height="54" src="./images/logo.png" /></div>
+        <div class="right"><img  height="54" src="./images/boy-with-ball-2.png" /></div>
+      </div>
+      <div class="page-block">
+        <div id="share" class="card">
+          <div class="slogan"><span>--------</span> 参与成功 <span>--------</span></div>
+          <input id="share-input" type="text"/>
+          <div class="tips">
+            长按复制链接<br>
+            为你喜爱的球队助力
+          </div>
         </div>
       </div>
-      <div>
-        <img id="girl-1" width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/girl-1.png" />
-        <img id="girl-2" width="50" src="http://o82r0gv7d.bkt.clouddn.com/images/girl-2.png" />
+      <div class="page-block clearfix">
+        <div class="left"><img height="100" src="./images/girl-1.png" /></div>
+        <div class="right"><img  height="100" src="./images/girl-2.png" /></div>
       </div>
     </section>
-  </div>
 
-  <div id="model">
-    <div id="model-wrap">
-      <div id="model--header">
-        提示信息
+    <!-- 模态框 - 错误通知 -->
+    <section id="info" class="model">
+      <div class="model-wrap">
+        <div class="model--header">
+          提示信息
+        </div>
+        <div id="info-content" class="model--content">
+        </div>
+        <div id="info-footer" class="model--footer">
+          确认
+        </div>
       </div>
-      <div id="model--content">
-      </div>
-      <div id="model--footer">
-        确认
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div id="process-container">
-    <div id="process">
-      <svg style="position: absolute; width: 0; height: 0; overflow: hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-          <symbol id="icon-autorenew" viewBox="0 0 24 24">
-            <title>autorenew</title>
-            <path class="path1" d="M18.75 7.734c0.797 1.219 1.266 2.719 1.266 4.266 0 4.406-3.609 8.016-8.016 8.016v3l-3.984-4.031 3.984-3.984v3c3.328 0 6-2.672 6-6 0-1.031-0.281-1.969-0.703-2.813zM12 6c-3.328 0-6 2.672-6 6 0 1.031 0.234 1.969 0.703 2.813l-1.453 1.453c-0.797-1.219-1.266-2.719-1.266-4.266 0-4.406 3.609-8.016 8.016-8.016v-3l3.984 4.031-3.984 3.984v-3z"></path>
-          </symbol>
-        </defs>
-      </svg>
+     <!-- 模态框 - 加载提示 -->
+    <section id="process-container" class="model">
+      <div id="process">
+        <svg style="position: absolute; width: 0; height: 0; overflow: hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <symbol id="icon-autorenew" viewBox="0 0 24 24">
+              <title>autorenew</title>
+              <path class="path1" d="M18.75 7.734c0.797 1.219 1.266 2.719 1.266 4.266 0 4.406-3.609 8.016-8.016 8.016v3l-3.984-4.031 3.984-3.984v3c3.328 0 6-2.672 6-6 0-1.031-0.281-1.969-0.703-2.813zM12 6c-3.328 0-6 2.672-6 6 0 1.031 0.234 1.969 0.703 2.813l-1.453 1.453c-0.797-1.219-1.266-2.719-1.266-4.266 0-4.406 3.609-8.016 8.016-8.016v-3l3.984 4.031-3.984 3.984v-3z"></path>
+            </symbol>
+          </defs>
+        </svg>
 
-      <div id="process-item-wrapper">
-        <svg id="process-item" class="rotate icon icon-autorenew"><use xlink:href="#icon-autorenew"></use></svg>
+        <div id="process-item-wrapper">
+          <svg id="process-item" class="rotate icon icon-autorenew"><use xlink:href="#icon-autorenew"></use></svg>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <script src="http://o82r0gv7d.bkt.clouddn.com/js/zepto.min.js"></script>
-  <script src="http://o82r0gv7d.bkt.clouddn.com/js//saber-cup.js"></script>
+    <script src="./zepto.min.js"></script>
+    <script src="./index.js"></script>
+
   </body>
 </html>
