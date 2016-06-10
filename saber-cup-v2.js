@@ -22,8 +22,19 @@
       server_data = data;
       $('#french-number').text(parseInt(server_data.host.vote));
       $('#romania-number').text(parseInt(server_data.guest.vote));
-      $('#share-input').val(server_data.short_url)
+      $('#share-input').val(server_data.short_url);
+
+      if (server_data.meta.expired == true) {
+        $(".float-button").css("background-color", "#ccc");
+        $(".float-button").text("比赛结束");
+      }
+
+      // 回调成功才开始挂载监听事件
+      mountListener();
     }, function() {
+      // 回调成功才开始挂载监听事件
+      mountListener();
+
       // 出错提醒
       $('#info-content').text('网络连接异常');
       togglePage("#info", 'on');
@@ -59,10 +70,12 @@
 
     var confirm_input = $('#phone-input');
 
-    french_button.on('click', toConfirmPage('french'));
-    french_button.on('touch', toConfirmPage('french'));
-    romania_button.on('click', toConfirmPage('romania'));
-    romania_button.on('touch', toConfirmPage('romania'));
+    if (server_data.meta.expired == false) {
+        french_button.on('click', toConfirmPage('french'));
+        french_button.on('touch', toConfirmPage('french'));
+        romania_button.on('click', toConfirmPage('romania'));
+        romania_button.on('touch', toConfirmPage('romania'));
+    }
 
     confirm_input.on('click', function() {
       var label = $('#input-label');
@@ -165,13 +178,11 @@
   // 页面渲染初始化
   viewRender();
 
-  mountListener();
-
-  ajaxGet(api_url, function(data) {
-
-  }, function (data) {
-
-  });
+  // ajaxGet(api_url, function(data) {
+  //
+  // }, function (data) {
+  //
+  // });
 
     // checkPageSize();
 })(Zepto);
