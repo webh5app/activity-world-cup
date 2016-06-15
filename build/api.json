@@ -1,0 +1,297 @@
+{
+  "data": {
+    "races": [
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "土耳其",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983786/0.jpg",
+          "nameCN": "土耳其",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "1b93f925-1d21-4d20-b879-522fe00e6253",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-12 21:00:00"
+        },
+        "title": "欧洲杯D组第1轮",
+        "guest": {
+          "name": "克罗地亚",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_535.png?v=7",
+          "nameCN": "克罗地亚",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "波兰",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983747/0.jpg",
+          "nameCN": "波兰",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "5fd697c4-5f2e-4a72-8cb8-8eb4013e69c3",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-13 00:00:00"
+        },
+        "title": "欧洲杯C组第1轮",
+        "guest": {
+          "name": "北爱尔兰",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983557/0.jpg",
+          "nameCN": "北爱尔兰",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "德国",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_357.png?v=7",
+          "nameCN": "德国",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "7a5d5463-cd89-4f6d-b152-f6d45c726c58",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-13 03:00:00"
+        },
+        "title": "欧洲杯C组第1轮",
+        "guest": {
+          "name": "乌克兰",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/126027515/0.jpg",
+          "nameCN": "乌克兰",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "西班牙",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_118.png?v=7",
+          "nameCN": "西班牙",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "1c79c2b4-d961-4436-b18d-ac3b92349878",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-13 21:00:00"
+        },
+        "title": "欧洲杯D组第1轮",
+        "guest": {
+          "name": "捷克",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_367.png?v=6",
+          "nameCN": "捷克",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "爱尔兰",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983567/0.jpg",
+          "nameCN": "爱尔兰",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "6c612d13-8004-4738-b657-3ee28fd9a5cd",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-14 00:00:00"
+        },
+        "title": "欧洲杯E组第1轮",
+        "guest": {
+          "name": "瑞典",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/304886139/0.jpg",
+          "nameCN": "瑞典",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "比利时",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_360.png?v=6",
+          "nameCN": "比利时",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "b335d77e-4d94-4b67-974e-6a61a5c9cbb9",
+        "meta": {
+          "expired": true,
+          "startAt": "2016-6-14 03:00:00"
+        },
+        "title": "欧洲杯E组第1轮",
+        "guest": {
+          "name": "意大利",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_119.png?v=7",
+          "nameCN": "意大利",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "奥地利",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983606/0.jpg",
+          "nameCN": "奥地利",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "5154ec0d-4d1a-4f8d-858b-78aecc1b7a73",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-15 00:00:00"
+        },
+        "title": "欧洲杯F组第1轮",
+        "guest": {
+          "name": "匈牙利",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983646/0.jpg",
+          "nameCN": "匈牙利",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "葡萄牙",
+          "flag": "http://f.seals.qq.com/filestore/10006/da/64/87/0/sportlogo/team_1_359.png?v=7",
+          "nameCN": "葡萄牙",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "a94abab3-7f14-43c6-a314-6b9a3003a8c7",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-15 03:00:00"
+        },
+        "title": "欧洲杯F组第1轮",
+        "guest": {
+          "name": "冰岛",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983667/0.jpg",
+          "nameCN": "冰岛",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "俄罗斯",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/337822196/0.jpg",
+          "nameCN": "俄罗斯",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "1d1cee4a-5037-48a2-ba84-ef4b77f01784",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-15 21:00:00"
+        },
+        "title": "欧洲杯B组第2轮",
+        "guest": {
+          "name": "斯洛伐克",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983717/0.jpg",
+          "nameCN": "斯洛伐克",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "罗马尼亚",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983686/0.jpg",
+          "nameCN": "罗马尼亚",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "14caba73-439e-4b03-9dda-10a5d68e13b8",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-16 00:00:00"
+        },
+        "title": "欧洲杯A组第2轮",
+        "guest": {
+          "name": "瑞士",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983578/0.jpg",
+          "nameCN": "瑞士",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "法国",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/337822212/0.jpg",
+          "nameCN": "法国",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "675f9483-d10d-43d1-ad68-d6e8834b9fd3",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-16 03:00:00"
+        },
+        "title": "欧洲杯A组第2轮",
+        "guest": {
+          "name": "阿尔巴尼亚",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983795/0.jpg",
+          "nameCN": "阿尔巴尼亚",
+          "score": 0,
+          "vote": 0
+        }
+      },
+      {
+        "short_url": "",
+        "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+        "host": {
+          "name": "英格兰",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983655/0.jpg",
+          "nameCN": "英格兰",
+          "score": 0,
+          "vote": 0
+        },
+        "uuid": "4b01cbad-db3d-403e-b5bd-3d23a25ce319",
+        "meta": {
+          "expired": false,
+          "startAt": "2016-6-16 21:00:00"
+        },
+        "title": "欧洲杯B组第2轮",
+        "guest": {
+          "name": "威尔士",
+          "flag": "http://inews.gtimg.com/newsapp_ls/0/308983593/0.jpg",
+          "nameCN": "威尔士",
+          "score": 0,
+          "vote": 0
+        }
+      }
+    ],
+    "date": "2016-06-11 - 2016-07-10",
+    "title": "2016欧洲杯"
+  },
+  "count": 12
+}

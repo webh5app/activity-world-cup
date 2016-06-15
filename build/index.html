@@ -1,95 +1,103 @@
+<!-- Mobile web app with bootstrap practice, by Wenliang Dai -->
+
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /> <!-- 防止百度添加广告 -->
     <meta name="viewport" content="width=device-width ,initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="http://o82r0gv7d.bkt.clouddn.com/css/worldcup.min.css" />
-    <title>Uber-UEFA</title>
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/uefa.css" />
+    <title>优步百万竞猜 欧洲杯揭幕战</title>
+
   </head>
   <body>
-    <div id="alert-box-container" class="alert-box-container display-none">
-      <div class="alert-box">
-        <div id="alert-box-content" class="alert-box-content"></div>
-        <button id="alert-box-button" class="alert-box-button">确定</button>
-      </div>
-    </div>
+    <!-- 白色球场框 -->
+    <!-- <div class="frame"><img src="images/football-frame-4.png"/></div> -->
 
-    <div class="container">
-      <section class="page page1">
-        <div class="border">
-          <div class="content">
-            <div>
-              <div class="content-top">
-                <div class="content-logo"></div>
-                <div class="content-football"></div>
-              </div>
-              <p class="content-title">优步百万竞猜<br />欧洲杯揭幕战</p>
-              <p class="content-time">6月11日 3:00</p>
+    <!-- 容器 -->
+    <div class="container-fluidd">
+      <!-- 第零页 -->
+      <section class="page page0">
+        <div class="row page0-top-row">
+          <div class="col-xs-12 page0-top-imgs">
+            <div class="page0-top-img shadow-box">
+              <img alt="logo" src="images/logo.png" />
             </div>
-            <div class="flags">
-              <img alt="主队国旗" id="flag1" class="flag"></img>
-              <img alt="客队国旗" id="flag2" class="flag"></img>
+            <div class="page0-top-img">
+              <img alt="boy" src="images/boy.png" />
             </div>
-            <div class="vote-container">
-              <div>
-                <button id="vote-button-1" class="vote-button">支持法国</button>
-                <div class="vote-status">
-                  <p>已有</p>
-                  <div id="vote-number-country-1" class="vote-number">0</div>
-                  <p>U粉支持</p>
-                </div>
+          </div>
+        </div>
+
+        <div class="row page0-date-row">
+          <div class="clearfix shadow-box">
+            <div id="date_1" class="col-xs-2 page0-date"></div>
+            <div id="date_2" class="col-xs-2 page0-date"></div>
+            <div id="date_3" class="col-xs-4 page0-date active-date"></div>
+            <div id="date_4" class="col-xs-2 page0-date"></div>
+            <div id="date_5" class="col-xs-2 page0-date"></div>
+          </div>
+        </div>
+        <div class="row page0-timetable-row">
+
+          <div class="col-xs-12 page0-timetable shadow-box">
+            <p class="page0-timetable-title">比赛时间表</p>
+
+            <!-- <div class="page0-timetable-game">
+              <div class="page0-gamecard-left">
+                <p>法国</p>
+                <img src="images/french.png" />
+                <button>点击投票</button>
               </div>
-              <div>
-                <button id="vote-button-2" class="vote-button">支持罗马尼亚</button>
-                <div class="vote-status">
-                  <p>已有</p>
-                  <div id="vote-number-country-2" class="vote-number">0</div>
-                  <p>U粉支持</p>
-                </div>
+              <div class="page0-gamecard-mid">
+                <p>vs</p>
+                <p>12:00</p>
               </div>
-            </div>
+              <div class="page0-gamecard-right">
+                <p>罗马尼亚</p>
+                <img src="images/romania.png" />
+                <button>点击投票</button>
+              </div>
+            </div> -->
+
           </div>
         </div>
       </section>
 
-      <section class="page page2">
-        <div class="content-top">
-          <div class="content-logo"></div>
-          <div class="content-character"></div>
-        </div>
-        <p class="content-phoneNumber">输入优步手机号</p>
-        <form>
-          <input type="text" />
-          <button id="confirm">确定</button>
-        </form>
-        <p class="content-line content-line-1">立即参与有奖竞猜</p>
-        <p class="content-line content-line-2">优步福利专属福利</p>
-        <div class="content-register-container">
-          <a href="https://get.uber.com.cn/envelope/我爱优步青岛/"><button class="content-register">点击注册</button></a>
-        </div>
-        <p class="content-line content-line-3">成为优步用户享首乘30元</p>
-      </section>
+      <!-- Modal Bootstrap模态框 -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none;">
+        <div class="modal-dialog" role="document" style="margin-top: 50%;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">参与竞猜</h4>
+            </div>
+            <div class="modal-body">
 
-      <section class="page page3">
-        <div class="content-top">
-          <div class="content-logo"></div>
-          <div class="content-character"></div>
-        </div>
-        <p class="content-congrats">参与成功！</p>
-        <form>
-          <input type="text" id="short-url" />
-          <!-- <button id="copy" data-clipboard-target="#short-url">复制</button> -->
-        </form>
-        <p class="content-line content-line-1">长按上方框内复制链接分享&#8593</p>
-        <p class="content-line content-line-2">为你喜爱的球队助力</p>
-        <div class="content-girls">
-          <div class="content-girl-1"></div>
-          <div class="content-girl-2"></div>
-        </div>
-      </section>
-    </div>
+              <form id="vote-modal-form" class="form-inline"  style="display:flex; flex-direction:column; align-items:center;">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon">+ 86</div>
+                    <input type="text" class="form-control" id="userPhoneInput" placeholder="输入您的优步手机号">
+                  </div>
+                </div>
+                <button id="join" type="submit" class="btn btn-primary">立即参与有奖竞猜</button>
+                <p id="wrongMsg"></p>
+              </form>
 
-    <div id="process-container">
+            </div>
+            <div class="modal-footer" style="display:flex; justify-content:center;">
+              <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+              <a id="modal-close" href="https://get.uber.com.cn/envelope/我爱优步青岛/" type="button" class="btn btn-default">注册成为优步用户</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- 模态框 - 加载提示 -->
+    <!-- <section id="process-container" class="model">
       <div id="process">
         <svg style="position: absolute; width: 0; height: 0; overflow: hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
@@ -101,13 +109,13 @@
         </svg>
 
         <div id="process-item-wrapper">
-          <svg id="process-item" class="icon icon-autorenew rotate"><use xlink:href="#icon-autorenew"></use></svg>
+          <svg id="process-item" class="rotate icon icon-autorenew"><use xlink:href="#icon-autorenew"></use></svg>
         </div>
       </div>
-    </div>
-
-    <script src="http://o82r0gv7d.bkt.clouddn.com/js/zepto.min.js"></script>
-                 <!-- http://o82r0gv7d.bkt.clouddn.com/js/worldcup.min.js -->
-    <script src="http://o82r0gv7d.bkt.clouddn.com/worldcup.min.js"></script>
+    </section> -->
   </body>
+  <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
+  <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/uefa_v2.js"></script>
 </html>

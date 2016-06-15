@@ -1,0 +1,23 @@
+{
+  "guest": {
+    "flag": "romania",
+    "name": "romania",
+    "nameCN": "罗马尼亚",
+    "vote": 2230
+  },
+  "host": {
+    "flag": "french",
+    "name": "french",
+    "nameCN": "法国",
+    "vote": 2802
+  },
+  "meta": {
+    "createAt": "2016-6-8 16:29:32",
+    "endAt": "2016-6-11 04:30:00",
+    "expired": false,
+    "startAt": "2016-6-10 00:00:01",
+    "updateAt": "2016-6-12 18:10:49"
+  },
+  "register_url": "https://get.uber.com.cn/envelope/我爱优步青岛/",
+  "short_url": "https://shorturl/"
+}
