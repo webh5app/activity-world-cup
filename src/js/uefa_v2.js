@@ -66,7 +66,13 @@ const createHtmlP = (text, style = undefined) => {
 const createHtmlImg = (src, alt) => {
   return $('<img alt="' + alt + '" src="' + src + '" />');
 };
-const createHtmlButton = (text, team, uuid) => {
+const createHtmlButton = (text, team, uuid, expired) => {
+  if(expired) {
+    var tempButton = $('<button data-team="' + team + '" data-uuid="' + uuid + '">已结束</button>');
+    tempButton.attr('disabled', 'disabled');
+    tempButton.css('background-color', '#95a5a6');
+    return tempButton;
+  }
   return $('<button data-team="' + team + '" data-uuid="' + uuid + '">' + text + '</button>');
 };
 const createHtmlDiv = (listOfElements, divClassName) => {
@@ -84,16 +90,17 @@ const createHtmlGameCard = (
   guestName,
   guestNameCN,
   time,
-  uuid
+  uuid,
+  expired
 ) => {
   const hostTitle = createHtmlP(hostNameCN);
   // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
   const hostFlag = createHtmlImg('./images/french.png', 'hostFLag');
-  const hostVoteButton = createHtmlButton('点击投票', hostName, uuid);
+  const hostVoteButton = createHtmlButton('点击投票', hostName, uuid, expired);
   const guestTitle = createHtmlP(guestNameCN);
   // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
   const guestFlag = createHtmlImg('./images/romania.png', 'guestFLag');
-  const guestVoteButton = createHtmlButton('点击投票', guestName, uuid);
+  const guestVoteButton = createHtmlButton('点击投票', guestName, uuid, expired);
   const leftDiv = createHtmlDiv([hostTitle, hostFlag, hostVoteButton], 'page0-gamecard-left');
   const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
   const rightDiv = createHtmlDiv([guestTitle, guestFlag, guestVoteButton], 'page0-gamecard-right');
@@ -125,6 +132,37 @@ const removeGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
 
 // 5. ajax callback functions
 const getInfo = (data) => {
+  // 异步加载其它 js、css和图片
+  // var head = document.getElementsByTagName('head')[0];
+  // var html = document.getElementsByTagName('html')[0];
+  var css_uefa = document.createElement('link');
+  css_uefa.type = "text/css";
+  css_uefa.rel  = "stylesheet";
+  css_uefa.href = "css/uefa.css";
+
+  var css_animate = document.createElement('link');
+  css_animate.type = "text/css";
+  css_animate.rel  = "stylesheet";
+  css_animate.href = "bower_components/animate.css/animate.min.css";
+
+  var js_bootstrap  = document.createElement("script");
+  js_bootstrap.type = "text/javascript";
+  js_bootstrap.src  = "bower_components/bootstrap/dist/js/bootstrap.min.js";
+
+  $('head').first().append(css_animate);
+  $('head').first().append(css_uefa);
+  $('html').first().append(js_bootstrap);
+
+  var img_logo = new Image();
+  var img_boy = new Image();
+  img_logo.src = 'images/logo.png';
+  img_boy.src = 'images/boy.png';
+
+  $('#boy').append(img_boy);
+  $('#logo').append(img_logo);
+
+  changeProgressBarValue(70);
+
   console.log(data);
   $('#date_1').text(dateString_1.substring(5));
   $('#date_2').text(dateString_2.substring(5));
@@ -134,15 +172,16 @@ const getInfo = (data) => {
 
   // 将卡片存储于cards
   for (var i = 0; i < data.data.races.length; i++) {
-    // console.log(data.data.races[i].meta.startAt.split(' ')[0]);
     var race = data.data.races[i];
+    var expired = race.meta.expired; // 比赛是否过期
     var tempCard = createHtmlGameCard(
       race.host.name,
       race.host.nameCN,
       race.guest.name,
       race.guest.nameCN,
       race.meta.startAt.split(' ')[1].substring(0, 5),
-      race.uuid
+      race.uuid,
+      expired
     );
     switch (data.data.races[i].meta.startAt.split(' ')[0]) {
       case dateString_1:
@@ -177,6 +216,12 @@ const getInfo = (data) => {
   }
   // 默认为今天的比赛
   addGameCardsOnOneDayInHtml(cards.date_3);
+  changeProgressBarValue(100);
+
+  // 加载完毕后停顿1s，再显示content，防止意外发生，显示也更流畅
+  window.setTimeout(() => {
+    loadEnd();
+  }, 1000);
 };
 const postPhoneNumber = (data) => {
   if(data.errcode === undefined) {
@@ -189,8 +234,8 @@ const postPhoneNumber = (data) => {
     }, 2000);
     // 改变已投场次的按钮样式，并disabled按钮
     $('.page0-timetable-game button').each(function(i) {
-      console.log(this.dataset.uuid);
-      if(this.dataset.uuid == uuid) {
+      // console.log(this.dataset.uuid);
+      if(this.dataset.uuid === uuid) {
         $(this).attr('disabled', 'disabled');
         $(this).css('background-color', '#95a5a6');
         $(this).text('已投票');
@@ -218,18 +263,32 @@ const postPhoneNumber = (data) => {
         errorMsg = "发生未知错误，请重新输入！";
         break;
     }
+    console.log(errorMsg);
   }
 };
 const handleAjaxFail = (errorThrown) => {
   // TODO 可用进度条替代
 };
 
+// 6. 加载完成，显示内容
+const loadEnd = () => {
+  $('.progress-wrapper').css('display', 'none');
+  $('.container-wrapper').css('display', 'block');
+};
+const changeProgressBarValue = (value) => {
+  var tempVal = value.toString();
+  $('.progress-bar').attr('aria-valuenow', tempVal);
+  $('.progress-bar').css('width', tempVal + '%');
+};
+// window.onload = () => {
+//   changeProgressBarValue(30);
+// }
 
 // ***********
 // **程序开始**
 // ***********
-(function() {
-  ajaxGet(reqUrl, getInfo, handleAjaxFail);
+$(function() {
+  ajaxGet(prefix+path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {
@@ -293,11 +352,11 @@ const handleAjaxFail = (errorThrown) => {
       $('#wrongMsg').css('display', 'block');
     } else {
       ajaxPost(
-        prefix + path + uuid,
+        prefix + path + uuid + '/',
         'phone=' + phoneNumber + '&team=' + voteTeam,
         postPhoneNumber,
         handleAjaxFail
       );
     }
   });
-})();
+});
