@@ -237,7 +237,11 @@ const postPhoneNumber = (data) => {
       // console.log(this.dataset.uuid);
       if(this.dataset.uuid === uuid) {
         $(this).attr('disabled', 'disabled');
-        $(this).css('background-color', '#95a5a6');
+        if(voteTeam === this.dataset.team) {
+          $(this).css('background-color', '#e74c3c');
+        } else {
+          $(this).css('background-color', '#95a5a6');
+        }
         $(this).text('已投票');
       }
     });
