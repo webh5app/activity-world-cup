@@ -1,4 +1,8 @@
 node_modules/
+build/bower_components/
+build/*.json
+build/js/uefa_v1.js
+build/js/preload.js
 .sass-cache/
 *.swp
 *.log

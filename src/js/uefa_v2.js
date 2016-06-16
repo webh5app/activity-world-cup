@@ -97,19 +97,19 @@ const createHtmlGameCard = (
   uuid,
   expired
 ) => {
-  const hostTitle = createHtmlP(hostNameCN);
+  const hostTitleElement = createHtmlP(hostNameCN);
   // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
   // const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
   const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag');
-  const hostVoteButton = createHtmlButton('点击投票', hostName, uuid, expired);
-  const guestTitle = createHtmlP(guestNameCN);
+  const hostVoteButtonElement = createHtmlButton('点击投票', hostName, uuid, expired);
+  const guestTitleElement = createHtmlP(guestNameCN);
   // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
   // const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
   const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag');
-  const guestVoteButton = createHtmlButton('点击投票', guestName, uuid, expired);
-  const leftDiv = createHtmlDiv([hostTitle, hostFlagElement, hostVoteButton], 'page0-gamecard-left');
+  const guestVoteButtonElement = createHtmlButton('点击投票', guestName, uuid, expired);
+  const leftDiv = createHtmlDiv([hostTitleElement, hostFlagElement, hostVoteButtonElement], 'page0-gamecard-left');
   const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
-  const rightDiv = createHtmlDiv([guestTitle, guestFlagElement, guestVoteButton], 'page0-gamecard-right');
+  const rightDiv = createHtmlDiv([guestTitleElement, guestFlagElement, guestVoteButtonElement], 'page0-gamecard-right');
   const cardDiv = createHtmlDiv([leftDiv, midDiv, rightDiv], 'page0-timetable-game');
 
   return cardDiv;
@@ -140,16 +140,16 @@ const preloadFiles = () => {
   var css_uefa = document.createElement('link');
   css_uefa.type = "text/css";
   css_uefa.rel  = "stylesheet";
-  css_uefa.href = "css/uefa.css";
+  css_uefa.href = "/css/uefa.css";
 
   var css_animate = document.createElement('link');
   css_animate.type = "text/css";
   css_animate.rel  = "stylesheet";
-  css_animate.href = "bower_components/animate.css/animate.min.css";
+  css_animate.href = "/css/animate.min.css";
 
   var js_bootstrap  = document.createElement("script");
   js_bootstrap.type = "text/javascript";
-  js_bootstrap.src  = "bower_components/bootstrap/dist/js/bootstrap.min.js";
+  js_bootstrap.src  = "/js/bootstrap.min.js";
 
   $('head').first().append(css_animate);
   $('head').first().append(css_uefa);
@@ -165,12 +165,15 @@ const getInfo = (data) => {
   preloadFiles();
   changeProgressBarValue(70);
 
-  console.log(data);
+  // console.log(data);
   $('#date_1').text(dateString_1.substring(5));
   $('#date_2').text(dateString_2.substring(5));
   $('#date_3').text(dateString_3.substring(5));
   $('#date_4').text(dateString_4.substring(5));
   $('#date_5').text(dateString_5.substring(5));
+
+  $('#modal-close').attr('href', data.data.races[0].register_url);
+  $('title').first().text(data.data.title);
 
   // 将卡片存储于cards
   for (var i = 0; i < data.data.races.length; i++) {
@@ -240,7 +243,6 @@ const postPhoneNumber = (data) => {
     }, 2000);
     // 改变已投场次的按钮样式，并disabled按钮
     $('.page0-timetable-game button').each(function(i) {
-      // console.log(this.dataset.uuid);
       if(this.dataset.uuid === uuid) {
         $(this).attr('disabled', 'disabled');
         if(voteTeam === this.dataset.team) {
@@ -290,9 +292,6 @@ const changeProgressBarValue = (value) => {
   $('.progress-bar').attr('aria-valuenow', tempVal);
   $('.progress-bar').css('width', tempVal + '%');
 };
-// window.onload = () => {
-//   changeProgressBarValue(30);
-// }
 
 // ***********
 // **程序开始**
@@ -369,4 +368,5 @@ $(function() {
       );
     }
   });
+
 });
