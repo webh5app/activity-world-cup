@@ -21,9 +21,7 @@ var indexPage = (function () {
         process.exit();
       }
       if (! indexString.endsWith(".html")) {
-        // console.error("Error: ", "Parameter " + indexString + " Must Use .html postfix！");
         indexString += ".html";
-        // process.exit();
       }
 
       return indexString;
@@ -32,6 +30,7 @@ var indexPage = (function () {
 })() || 'index.html';
 
 var gulp        = require('gulp'),
+    htmlmin     = require('gulp-htmlmin'),
     sass        = require('gulp-ruby-sass'), // build sass
     // sass = require('gulp-sass'), //
     jshint      = require('gulp-jshint'), // check js syntax
@@ -42,11 +41,12 @@ var gulp        = require('gulp'),
     cleanCss    = require('gulp-clean-css'), // compress css
     sourcemaps  = require('gulp-sourcemaps'), // js blank
     imagemin    = require('gulp-imagemin'), // compress images
-    babel       = require('gulp-babel'), //
+    babel       = require('gulp-babel'), // es6 -> es5
     notify      = require('gulp-notify'), // notify info
-    // watch    = require('gulp-watch'), //
+    rename      = require('gulp-rename'),
     livereload  = require('gulp-livereload'), // livereload
-    webserver   = require('gulp-webserver'); // webserver
+    // webserver   = require('gulp-webserver'); // webserver
+    webserver   = require('gulp-server-livereload');
 
 var MODE = process.env.npm_lifecycle_event;
 var SOURCE_DIR = './src',
@@ -75,58 +75,47 @@ var Compile = function (file) {
                    .pipe(gulp.dest(path.join(buildPath || SOURCE_DIR, 'css')));
           },
           css: function compileCss (filePath, buildPath) {
-            if (MODE === 'build') {
-                gulp.src(filePath)
-                    .pipe(autoprefixer('last 2 version'))
-                    .pipe(cleanCss())
-                    .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'css')))
-                    .pipe(livereload());
-            } else {
                 gulp.src(filePath)
                     .pipe(sourcemaps.init())
                     .pipe(autoprefixer('last 2 version'))
                     .pipe(sourcemaps.write())
+                    .pipe(rename(function (path) {
+                      path.basename += '.min';
+                      path.extname = '.css';
+                    }))
                     .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'css')))
-                    .pipe(livereload());
-            }
+                    // .pipe(livereload());
           },
           js: function compileJs (filePath, buildPath) {
-            if (MODE === 'build') {
-                gulp.src(filePath)
-                    .pipe(jshint())
-                    .pipe(jshint.reporter('default'))
-                    .pipe(babel({
-                        presets: ['es2015']
-                    }))
-                    .pipe(uglify())
-                    .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'js')))
-                    .pipe(livereload());
-            } else {
                 gulp.src(filePath)
                     .pipe(sourcemaps.init())
-                    .pipe(babel({
-                        presets: ['es2015']
-                    }))
+                    // .pipe(babel({
+                    //     presets: ['es2015']
+                    // }))
+                    .pipe(babel())
                     .pipe(sourcemaps.write())
+                    .pipe(rename(function (path) {
+                      path.basename += '.min';
+                      path.extname = '.js';
+                    }))
                     .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'js')))
-                    .pipe(livereload());
-            }
+                    // .pipe(livereload());
           },
           image: function compileImage (filePath, buildPath) {
             gulp.src(filePath)
                 .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
                 .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'images')))
-                .pipe(livereload());
+                // .pipe(livereload());
           },
           fonts: function copyFonts (filePath, buildPath) {
             gulp.src(filePath)
                 .pipe(gulp.dest(path.join(buildPath || BUILD_DIR, 'images')))
-                .pipe(livereload());
+                // .pipe(livereload());
           },
           html: function copyHtml (filePath, buildPath) {
             gulp.src(filePath)
                 .pipe(gulp.dest(path.join(__dirname, buildPath || BUILD_DIR)))
-                .pipe(livereload());
+                // .pipe(livereload());
           },
         },
       };
@@ -134,7 +123,6 @@ var Compile = function (file) {
       // deal with file
       for (var index in config.loaders) {
         if (config.loaders[index].test.test(file.path)) {
-          // console.log(file.path + ' is ' + config.loaders[index].loader);
           config.deals[config.loaders[index].loader](file.path);
         }
       }
@@ -148,27 +136,29 @@ gulp.task('webserver', function () {
         .pipe(webserver({
             host: '0.0.0.0',
             port: 8090,
-            path: '/',
+            // path: '/', // gulp-webserver
+            // livereload: {
+            //   enable: true,
+            //   port: 3375,
+            //   filter: function (fileName) {
+            //     console.log(fileName);
+            //     return true;
+            //   },
+            // },
             livereload: true,
-            // open: true,
-            open: '/' + indexPage,
+            open: true, // gulp-server-livereload
+            defaultFile: indexPage, // gulp-server-livereload
+            // open: '/' + indexPage, // gulp-webserver
         }));
+
   stream.emit('kill');
 });
 
 gulp.task('index', function () {
     gulp.src(path.join(SOURCE_DIR, "*.html"))
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(path.join(__dirname, BUILD_DIR)));
 });
-
-
-var event = {
-  sass: function (file) {
-    return sass(file.path, {style: 'expanded'})
-           .on('error', sass.logError)
-           .pipe(gulp.dest(path.join(SOURCE_DIR, 'css')));
-  }
-};
 
 // common
 gulp.task('sass', function (event) {
@@ -179,39 +169,27 @@ gulp.task('sass', function (event) {
 
 
 // build mode: compress js
-// develop mode: just copy js
 gulp.task('uglify', function () {
-    if (MODE === 'build') {
-        gulp.src(path.join(SOURCE_DIR, 'js/**/*.js'))
-            .pipe(jshint())
-            .pipe(jshint.reporter('default'))
-            .pipe(babel({
-                presets: ['es2015']
-             }))
-            .pipe(uglify())
-            .pipe(gulp.dest(path.join(BUILD_DIR, 'js')));
-    } else {
-        gulp.src(path.join(SOURCE_DIR, 'js/**/*.js'))
-            .pipe(gulp.dest(path.join(BUILD_DIR, 'js')))
-            .pipe(livereload());
-    }
+  gulp.src(path.join(SOURCE_DIR, 'js/**/*.js'))
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(babel({
+        presets: ['es2015']
+      }))
+      .pipe(uglify())
+      .pipe(rename(function (path) {
+        path.basename += '.min';
+        path.extname = '.js';
+      }))
+      .pipe(gulp.dest(path.join(BUILD_DIR, 'js')));
 });
 
 // build mode: compress css
-// develop mode: copy css
 gulp.task('cleanCss', function () {
-    if (MODE === 'build') {
-        console.log(path.join(SOURCE_DIR, 'css/**/*.css'));
-        gulp.src(path.join(SOURCE_DIR, 'css/**/*.css'))
-            .pipe(autoprefixer('last 2 version'))
-            .pipe(cleanCss())
-            .pipe(gulp.dest(path.join(BUILD_DIR, 'css')));
-    } else {
-        gulp.src(path.join(SOURCE_DIR, 'css/**/*.css'))
-            .pipe(autoprefixer('last 2 version'))
-            .pipe(gulp.dest(path.join(BUILD_DIR, 'css')))
-            .pipe(livereload());
-    }
+  gulp.src(path.join(SOURCE_DIR, 'css/**/*.css'))
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(cleanCss())
+    .pipe(gulp.dest(path.join(BUILD_DIR, 'css')));
 });
 
 // build image
@@ -219,7 +197,7 @@ gulp.task('imagemin', function () {
     gulp.src(path.join(SOURCE_DIR, 'images/**/*'))
         .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true}))
         .pipe(gulp.dest(path.join(BUILD_DIR, 'images')))
-        .pipe(livereload());
+        // .pipe(livereload());
 });
 
 gulp.task('fonts', function () {
@@ -230,18 +208,22 @@ gulp.task('fonts', function () {
 gulp.task('watch', function () {
     if (MODE === 'build') return ;
 
-    // gulp.watch(path.join(SOURCE_DIR, 'sass/**/*.scss'), ['sass']);
-    // gulp.watch('sass/**/*.scss', {cwd: SOURCE_DIR}, ['sass']);
-    // gulp.watch([path.join(SOURCE_DIR, '*.html')], ['index']).on('change', livereload.changed);
-
     gulp.watch([path.join(SOURCE_DIR, '/**/*')]).on('change', function (file) {
       Compile(file);
     });
 
-    livereload.listen();
-
+    // livereload.listen({
+    //   host: '0.0.0.0',
+    //   port: 3376,
+    //   start: true,
+    // });
 });
 
+
+// Develop mode: npm run start  // default start index.html
+//               npm run start --index activity // start activity.html
+//
+// Product mode: npm run build
 if (MODE === 'build') {
     gulp.task('default', [
               'index',
