@@ -1,6 +1,8 @@
 // 全局变量:
-var prefix = 'http://10.124.18.115:8080/';
+// var prefix = 'http://10.124.18.115:8080/';
+var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
+
 var uuid;
 var reqUrl = '../api.json'; // 本地临时测试用
 var voteTeam;
@@ -87,23 +89,27 @@ const createHtmlDiv = (listOfElements, divClassName) => {
 const createHtmlGameCard = (
   hostName,
   hostNameCN,
+  hostFlag,
   guestName,
   guestNameCN,
+  guestFlag,
   time,
   uuid,
   expired
 ) => {
   const hostTitle = createHtmlP(hostNameCN);
   // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
-  const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
+  // const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
+  const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag');
   const hostVoteButton = createHtmlButton('点击投票', hostName, uuid, expired);
   const guestTitle = createHtmlP(guestNameCN);
   // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
-  const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
+  // const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
+  const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag');
   const guestVoteButton = createHtmlButton('点击投票', guestName, uuid, expired);
-  const leftDiv = createHtmlDiv([hostTitle, hostFlag, hostVoteButton], 'page0-gamecard-left');
+  const leftDiv = createHtmlDiv([hostTitle, hostFlagElement, hostVoteButton], 'page0-gamecard-left');
   const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
-  const rightDiv = createHtmlDiv([guestTitle, guestFlag, guestVoteButton], 'page0-gamecard-right');
+  const rightDiv = createHtmlDiv([guestTitle, guestFlagElement, guestVoteButton], 'page0-gamecard-right');
   const cardDiv = createHtmlDiv([leftDiv, midDiv, rightDiv], 'page0-timetable-game');
 
   return cardDiv;
@@ -130,9 +136,7 @@ const removeGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
   }
 };
 
-// 5. ajax callback functions
-const getInfo = (data) => {
-  // 异步加载其它 js、css和图片
+const preloadFiles = () => {
   var css_uefa = document.createElement('link');
   css_uefa.type = "text/css";
   css_uefa.rel  = "stylesheet";
@@ -151,14 +155,14 @@ const getInfo = (data) => {
   $('head').first().append(css_uefa);
   $('html').first().append(js_bootstrap);
 
-  var img_logo = new Image();
-  var img_boy = new Image();
-  img_logo.src = 'images/logo.png';
-  img_boy.src = 'images/boy.png';
+  $('#football').append(createHtmlImg('//ooo.0o0.ooo/2016/06/15/57622df0744e3.png', 'football'));
+  $('#logo').append(createHtmlImg('//ooo.0o0.ooo/2016/06/15/57622884e73bb.png', 'logo'));
+};
 
-  $('#boy').append(img_boy);
-  $('#logo').append(img_logo);
-
+// 5. ajax callback functions
+const getInfo = (data) => {
+  // 异步加载其它 js、css和图片
+  preloadFiles();
   changeProgressBarValue(70);
 
   console.log(data);
@@ -171,12 +175,15 @@ const getInfo = (data) => {
   // 将卡片存储于cards
   for (var i = 0; i < data.data.races.length; i++) {
     var race = data.data.races[i];
+    // console.log(race.host.flag);
     var expired = race.meta.expired; // 比赛是否过期
     var tempCard = createHtmlGameCard(
       race.host.name,
       race.host.nameCN,
+      race.host.flag,
       race.guest.name,
       race.guest.nameCN,
+      race.guest.flag,
       race.meta.startAt.split(' ')[1].substring(0, 5),
       race.uuid,
       expired
@@ -207,6 +214,7 @@ const getInfo = (data) => {
     if(cards[i].length == 0) {
       cards[i].push(createHtmlP('无赛事', {
         'width': '100%',
+        'color': '#fff',
         'font-size': '2rem',
         'text-align': 'center'
       }));
@@ -290,7 +298,7 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
-  ajaxGet(reqUrl, getInfo, handleAjaxFail);
+  ajaxGet(prefix+path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {

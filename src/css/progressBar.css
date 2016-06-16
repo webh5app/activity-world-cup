@@ -1,3 +1,7 @@
+body {
+  background-color: #7f8c8d;
+}
+
 .page {
   position: absolute;
   display: none;
