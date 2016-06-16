@@ -95,11 +95,11 @@ const createHtmlGameCard = (
 ) => {
   const hostTitle = createHtmlP(hostNameCN);
   // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
-  const hostFlag = createHtmlImg('./images/french.png', 'hostFLag');
+  const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
   const hostVoteButton = createHtmlButton('点击投票', hostName, uuid, expired);
   const guestTitle = createHtmlP(guestNameCN);
   // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
-  const guestFlag = createHtmlImg('./images/romania.png', 'guestFLag');
+  const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
   const guestVoteButton = createHtmlButton('点击投票', guestName, uuid, expired);
   const leftDiv = createHtmlDiv([hostTitle, hostFlag, hostVoteButton], 'page0-gamecard-left');
   const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
@@ -133,8 +133,6 @@ const removeGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
 // 5. ajax callback functions
 const getInfo = (data) => {
   // 异步加载其它 js、css和图片
-  // var head = document.getElementsByTagName('head')[0];
-  // var html = document.getElementsByTagName('html')[0];
   var css_uefa = document.createElement('link');
   css_uefa.type = "text/css";
   css_uefa.rel  = "stylesheet";
@@ -292,7 +290,7 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
-  ajaxGet(prefix+path, getInfo, handleAjaxFail);
+  ajaxGet(reqUrl, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {
