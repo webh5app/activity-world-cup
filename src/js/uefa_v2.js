@@ -4,7 +4,7 @@ var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
 
 var uuid;
-var reqUrl = '../api.json'; // 本地临时测试用
+// var reqUrl = '../api.json'; // 本地临时测试用
 var voteTeam;
 var cards = {
   date_1: [],
@@ -126,6 +126,7 @@ const addGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
     event.preventDefault();
     voteTeam = this.dataset.team;
     uuid = this.dataset.uuid;
+    $('#wrongMsg').css('display', 'none');
     $('#myModal').modal('show');
   });
 };
@@ -275,11 +276,13 @@ const postPhoneNumber = (data) => {
         errorMsg = "发生未知错误，请重新输入！";
         break;
     }
-    console.log(errorMsg);
+    // console.log(errorMsg);
+    $('#wrongMsg').text(errorMsg);
+    $('#wrongMsg').css('display', 'block');
   }
 };
 const handleAjaxFail = (errorThrown) => {
-  // TODO 可用进度条替代
+  // TODO
 };
 
 // 6. 加载完成，显示内容
@@ -368,5 +371,4 @@ $(function() {
       );
     }
   });
-
 });
