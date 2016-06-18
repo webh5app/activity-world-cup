@@ -3,7 +3,7 @@
 var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
 var uuid;
-var reqUrl = '../api.json'; // 本地临时测试用
+// var reqUrl = '../api.json'; // 本地临时测试用
 var voteTeam;
 var cards = {
   date_1: [],
@@ -342,8 +342,8 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
-  ajaxGet(reqUrl, getInfo, handleAjaxFail);
-  // ajaxGet(prefix + path, getInfo, handleAjaxFail);
+  // ajaxGet(reqUrl, getInfo, handleAjaxFail);
+  ajaxGet(prefix + path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {
