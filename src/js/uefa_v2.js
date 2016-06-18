@@ -2,7 +2,6 @@
 // var prefix = 'http://10.124.18.115:8080/';
 var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
-
 var uuid;
 // var reqUrl = '../api.json'; // 本地临时测试用
 var voteTeam;
@@ -20,7 +19,6 @@ let dateString_2;
 let dateString_3;
 let dateString_4;
 let dateString_5;
-
 
 // 通用函数们:
 // 1. ajax get&post functions
@@ -173,7 +171,12 @@ const getInfo = (data) => {
   $('#date_4').text(dateString_4.substring(5));
   $('#date_5').text(dateString_5.substring(5));
 
-  $('#modal-close').attr('href', data.data.races[0].register_url);
+  // 如果至少有一场比赛，则设置投票modal窗口里的注册链接
+  if(data.data.races.length > 0) {
+    $('#modal-close').attr('href', data.data.races[0].register_url);
+  }
+
+  // 设置html title
   $('title').first().text(data.data.title);
 
   // 将卡片存储于cards
@@ -300,7 +303,7 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
-  ajaxGet(prefix+path, getInfo, handleAjaxFail);
+  ajaxGet(prefix + path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {

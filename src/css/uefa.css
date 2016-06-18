@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   padding: 0;
   margin: 0;
@@ -196,69 +195,6 @@ html {
   font-size: .7rem;
 }
 
-/* 加载指示器 */
-.model {
-  display: none;
-  position: absolute;
-  overflow: auto;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-#process-container {
-  display: none;
-}
-#process-container #process {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-#process-container #process-item-wrapper {
-  width: 6rem;
-  height: 6rem;
-  padding: 2rem;
-  color: #fff;
-  border-radius: 7px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.48);
-  background-color: rgba(0, 0, 0, 0.72);
-}
-#process-container #process-item {
-  width: 2rem;
-  height: 2rem;
-}
-#process-container .icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-}
-#process-container .rotate {
-  -webkit-animation: spin 4s linear infinite;
-  -moz-animation: spin 4s linear infinite;
-  animation: spin 4s linear infinite;
-}
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 .shadow-box {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
