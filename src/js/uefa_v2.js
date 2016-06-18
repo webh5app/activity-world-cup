@@ -3,7 +3,7 @@
 var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
 var uuid;
-// var reqUrl = '../api.json'; // 本地临时测试用
+var reqUrl = '../api.json'; // 本地临时测试用
 var voteTeam;
 var cards = {
   date_1: [],
@@ -98,30 +98,50 @@ const createHtmlGameCard = (
   expired
 ) => {
   const hostTitleElement = createHtmlP(hostNameCN);
-  // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
-  // const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
   const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag');
   const hostVoteNumber = createHtmlP(hostVote, {
     'width': '100%',
     'margin': '0'
   });
   const hostVoteNumberElement = createHtmlDiv([hostVoteNumber], 'page0-gamecard-voteNumber');
-  const hostVoteButtonElement = createHtmlButton('点击投票', hostName, uuid, expired);
+  const hostVoteButtonElement = createHtmlButton(hostNameCN+'胜', hostName, uuid, expired);
 
   const guestTitleElement = createHtmlP(guestNameCN);
-  // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
-  // const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
   const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag');
   const guestVoteNumber = createHtmlP(guestVote, {
     'width': '100%',
     'margin': '0'
   });
   const guestVoteNumberElement = createHtmlDiv([guestVoteNumber], 'page0-gamecard-voteNumber');
-  const guestVoteButtonElement = createHtmlButton('点击投票', guestName, uuid, expired);
-  const leftDiv = createHtmlDiv([hostTitleElement, hostFlagElement, hostVoteNumberElement, hostVoteButtonElement], 'page0-gamecard-left');
-  const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
-  const rightDiv = createHtmlDiv([guestTitleElement, guestFlagElement, guestVoteNumberElement, guestVoteButtonElement], 'page0-gamecard-right');
-  const cardDiv = createHtmlDiv([leftDiv, midDiv, rightDiv], 'page0-timetable-game');
+  const guestVoteButtonElement = createHtmlButton(guestNameCN+'胜', guestName, uuid, expired);
+
+  const pingVoteButtonElement = createHtmlButton('打平', 'ping', uuid, expired);
+
+  const leftDiv = createHtmlDiv([
+    hostTitleElement,
+    hostFlagElement,
+    hostVoteNumberElement,
+    hostVoteButtonElement
+  ], 'page0-gamecard-left');
+
+  const midDiv = createHtmlDiv([
+    createHtmlP('vs'),
+    createHtmlP(time),
+    pingVoteButtonElement
+  ], 'page0-gamecard-mid');
+
+  const rightDiv = createHtmlDiv([
+    guestTitleElement,
+    guestFlagElement,
+    guestVoteNumberElement,
+    guestVoteButtonElement
+  ], 'page0-gamecard-right');
+
+  const cardDiv = createHtmlDiv([
+    leftDiv,
+    midDiv,
+    rightDiv
+  ], 'page0-timetable-game');
 
   return cardDiv;
 };
@@ -265,6 +285,10 @@ const postPhoneNumber = (data) => {
       if(this.dataset.uuid === uuid) {
         $(this).attr('disabled', 'disabled');
         if(voteTeam === this.dataset.team) {
+          if(voteTeam !== 'ping') {
+            var tempVoteNumber = $(this).prev().find('p').text();
+            $(this).prev().find('p').text((Number(tempVoteNumber) + 1).toString());
+          }
           $(this).css('background-color', '#e74c3c');
         } else {
           $(this).css('background-color', '#95a5a6');
@@ -318,8 +342,8 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
-  // ajaxGet(reqUrl, getInfo, handleAjaxFail);
-  ajaxGet(prefix + path, getInfo, handleAjaxFail);
+  ajaxGet(reqUrl, getInfo, handleAjaxFail);
+  // ajaxGet(prefix + path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期
   switch (day) {

@@ -247,6 +247,13 @@ html {
               background-color: #2ecc71;
               border-radius: 3px;
             }
+
+            button {
+              width: 100%;
+              margin: auto;
+              margin-top: 1rem;
+              letter-spacing: .1rem;
+            }
           }
 
           .page0-gamecard-right {
@@ -269,7 +276,7 @@ html {
 
           button {
             width: 85%;
-            height: auto;
+            height: 6%;
             padding: .2rem;
             margin-top: .5rem;
             outline: none;
