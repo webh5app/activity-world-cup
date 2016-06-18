@@ -110,6 +110,44 @@ html {
       }
     }
 
+    .page0-rule-box {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      background-color: #efefef;
+      border-radius: 5px;
+
+      p {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: .5rem 0;
+        color: #fff;
+        letter-spacing: .2rem;
+        font-size: 1rem;
+        text-align: center;
+        background-color: #3498db;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      ul {
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-bottom: .6rem;
+        list-style: none;
+
+        li {
+          position: relative;
+          width: 100%;
+          height: auto;
+          margin-top: .1rem;
+        }
+      }
+    }
+
     .page0-timetable-row {
       position: relative;
       width: 100%;
@@ -150,6 +188,17 @@ html {
           border-radius: 3px;
           box-shadow: 0px 2px 4px rgba(0,0,0,.25);
 
+          .page0-gamecard-voteNumber {
+            width: 85%;
+            height: auto;
+            padding: .1rem 0;
+            margin-top: .5rem;
+            border: 2px solid #e74c3c;
+            border-radius: 3px;
+            color: #e74c3c;
+            font-size: .7rem;
+          }
+
           .page0-gamecard-left {
             width: 30%;
             height: auto;
@@ -158,6 +207,10 @@ html {
             align-items: center;
             color: #27ae60;
             text-align: center;
+
+            p {
+              font-size: .8rem;
+            }
 
             img {
               width: 85%;
@@ -197,6 +250,10 @@ html {
             align-items: center;
             color: #27ae60;
             text-align: center;
+
+            p {
+              font-size: .8rem;
+            }
 
             img {
               width: 85%;

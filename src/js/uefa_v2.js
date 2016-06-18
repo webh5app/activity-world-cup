@@ -88,9 +88,11 @@ const createHtmlGameCard = (
   hostName,
   hostNameCN,
   hostFlag,
+  hostVote,
   guestName,
   guestNameCN,
   guestFlag,
+  guestVote,
   time,
   uuid,
   expired
@@ -99,15 +101,26 @@ const createHtmlGameCard = (
   // const hostFlag = createHtmlImg('./images/' + hostName + '.png', 'hostFLag');
   // const hostFlag = createHtmlImg('./images/' + hostName + '.jpg', 'hostFLag');
   const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag');
+  const hostVoteNumber = createHtmlP(hostVote, {
+    'width': '100%',
+    'margin': '0'
+  });
+  const hostVoteNumberElement = createHtmlDiv([hostVoteNumber], 'page0-gamecard-voteNumber');
   const hostVoteButtonElement = createHtmlButton('点击投票', hostName, uuid, expired);
+
   const guestTitleElement = createHtmlP(guestNameCN);
   // const guestFlag = createHtmlImg('./images/' + guestName + '.png', 'guestFLag');
   // const guestFlag = createHtmlImg('./images/' + guestName + '.jpg', 'guestFLag');
   const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag');
+  const guestVoteNumber = createHtmlP(guestVote, {
+    'width': '100%',
+    'margin': '0'
+  });
+  const guestVoteNumberElement = createHtmlDiv([guestVoteNumber], 'page0-gamecard-voteNumber');
   const guestVoteButtonElement = createHtmlButton('点击投票', guestName, uuid, expired);
-  const leftDiv = createHtmlDiv([hostTitleElement, hostFlagElement, hostVoteButtonElement], 'page0-gamecard-left');
+  const leftDiv = createHtmlDiv([hostTitleElement, hostFlagElement, hostVoteNumberElement, hostVoteButtonElement], 'page0-gamecard-left');
   const midDiv = createHtmlDiv([createHtmlP('vs'), createHtmlP(time)], 'page0-gamecard-mid');
-  const rightDiv = createHtmlDiv([guestTitleElement, guestFlagElement, guestVoteButtonElement], 'page0-gamecard-right');
+  const rightDiv = createHtmlDiv([guestTitleElement, guestFlagElement, guestVoteNumberElement, guestVoteButtonElement], 'page0-gamecard-right');
   const cardDiv = createHtmlDiv([leftDiv, midDiv, rightDiv], 'page0-timetable-game');
 
   return cardDiv;
@@ -188,9 +201,11 @@ const getInfo = (data) => {
       race.host.name,
       race.host.nameCN,
       race.host.flag,
+      race.host.vote,
       race.guest.name,
       race.guest.nameCN,
       race.guest.flag,
+      race.guest.vote,
       race.meta.startAt.split(' ')[1].substring(0, 5),
       race.uuid,
       expired
@@ -285,7 +300,7 @@ const postPhoneNumber = (data) => {
   }
 };
 const handleAjaxFail = (errorThrown) => {
-  // TODO
+  // TODO:
 };
 
 // 6. 加载完成，显示内容
