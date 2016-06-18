@@ -305,7 +305,7 @@ const handleAjaxFail = (errorThrown) => {
 
 // 6. 加载完成，显示内容
 const loadEnd = () => {
-  $('.progress-wrapper').css('display', 'none');
+  $('#preload-page').css('display', 'none');
   $('.container-wrapper').css('display', 'block');
 };
 const changeProgressBarValue = (value) => {
@@ -318,6 +318,7 @@ const changeProgressBarValue = (value) => {
 // **程序开始**
 // ***********
 $(function() {
+  // ajaxGet(reqUrl, getInfo, handleAjaxFail);
   ajaxGet(prefix + path, getInfo, handleAjaxFail);
 
   // 设置5天的时间string，用于判断比赛日期

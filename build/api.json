@@ -225,7 +225,7 @@
           "flag": "http://inews.gtimg.com/newsapp_ls/0/308983686/0.jpg",
           "nameCN": "罗马尼亚",
           "score": 0,
-          "vote": 0
+          "vote": 123
         },
         "uuid": "14caba73-439e-4b03-9dda-10a5d68e13b8",
         "meta": {
@@ -238,7 +238,7 @@
           "flag": "http://inews.gtimg.com/newsapp_ls/0/308983578/0.jpg",
           "nameCN": "瑞士",
           "score": 0,
-          "vote": 0
+          "vote": 312
         }
       },
       {
@@ -273,7 +273,7 @@
           "flag": "http://inews.gtimg.com/newsapp_ls/0/308983655/0.jpg",
           "nameCN": "英格兰",
           "score": 0,
-          "vote": 0
+          "vote": 1023
         },
         "uuid": "4b01cbad-db3d-403e-b5bd-3d23a25ce319",
         "meta": {
@@ -286,7 +286,7 @@
           "flag": "http://inews.gtimg.com/newsapp_ls/0/308983593/0.jpg",
           "nameCN": "威尔士",
           "score": 0,
-          "vote": 0
+          "vote": 321
         }
       }
     ],
