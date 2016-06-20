@@ -1,9 +1,16 @@
-// 全局变量:
-// var prefix = 'http://10.124.18.115:8080/';
-var prefix = '/';
+/*  Global variables:
+**  1. prefix - the host path of the ajax request url
+**  2. path - the path under the host
+**  3. uuid - a unique id for every game
+**  4. voteTeam - the team that the user voted
+**  5. cards - the vote timetable cards of recent 5 days(date_3 is today)
+**  6. dateStrings - 5 strings that represent the date of recent 5 days, e.g. 2016-6-20
+*/
+var prefix = 'http://10.124.18.115:8080/';
+// var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
 var uuid;
-// var reqUrl = '../api.json'; // 本地临时测试用
+var reqUrl = '../api.json';
 var voteTeam;
 var cards = {
   date_1: [],
@@ -20,8 +27,26 @@ let dateString_3;
 let dateString_4;
 let dateString_5;
 
-// 通用函数们:
-// 1. ajax get&post functions
+/*  Utility functions(general info):
+**  1. ajaxGet, ajaxPost - used when making an ajax request
+**  2. createHtmlP, createHtmlImg, ... - create a html DOM element
+**  3. createHtmlGameCard - using the functions above to create a timetable card for one game
+**  4. addGameCardsOnOneDayInHtml - add the cards in the input array to the timatable view
+**  5. removeGameCardsOnOneDayInHtml - remove the cards in the input array from the timatable view
+**  6. preloadFiles - loading all (js & css & img) files into the html
+**  7. getInfo - the success callback funtion for getting initial information
+**  8. postPhoneNumber - the success callback function for posting the phone number when voting
+**  9. handleAjaxFail - show error info when the ajax request failed
+**  10. loadEnd - hide the progress-bar view and show the main content after loading necessary data
+**  11. changeProgressBarValue - change the progress-bar's value(length)
+*/
+
+/* Ajax get function
+** @param:
+**    url - request url
+**    success_cb - the success callback functions
+**    fail_cb - the fail callback function
+*/
 const ajaxGet = (url, success_cb, fail_cb) => {
   $.ajax({
     type: 'GET',
@@ -35,6 +60,14 @@ const ajaxGet = (url, success_cb, fail_cb) => {
     fail_cb(errorThrown);
   });
 };
+
+/* Ajax post function
+** @param:
+**    url - request url
+**    data - the data to post to the server
+**    success_cb - the success callback functions
+**    fail_cb - the fail callback function
+*/
 const ajaxPost = (url, data, success_cb, fail_cb) => {
   $.ajax({
     type: 'POST',
@@ -50,22 +83,42 @@ const ajaxPost = (url, data, success_cb, fail_cb) => {
   });
 };
 
-// 2. 生成 html 组件
+/* Create a <p> DOM element
+** @param:
+**    text - the inner text to write in it (<p>text</p>)
+**    style - the css style applied to this element, dafault to undefined
+** @return: the reference of this element
+*/
 const createHtmlP = (text, style = undefined) => {
   if(style === undefined) {
     return $('<p>' + text + '</p>');
   }
 
-  // 如果有样式传入，加上样式
   var styles = '';
   for(var key in style) {
     styles = styles + key + ':' + style[key] + ';';
   }
   return $('<p style="' + styles + '">' + text + '</p>');
 };
+
+/* Create a <img> DOM element
+** @param:
+**    src - the source path of the image
+**    alt - the alternative text
+** @return: the reference of this element
+*/
 const createHtmlImg = (src, alt) => {
   return $('<img alt="' + alt + '" src="' + src + '" />');
 };
+
+/* Create a <button> DOM element
+** @param:
+**    text - the inner text to write in it (<button>text</button>)
+**    team - data-team mark in the tag to store the team name for voting purpose
+**    uuid - data0uuid mark in the tag to store the uuid of this game for voting purpose
+**    expired - if the game has ended, the value is true
+** @return: the reference of this element
+*/
 const createHtmlButton = (text, team, uuid, expired) => {
   if(expired) {
     var tempButton = $('<button data-team="' + team + '" data-uuid="' + uuid + '">已结束</button>');
@@ -75,6 +128,13 @@ const createHtmlButton = (text, team, uuid, expired) => {
   }
   return $('<button data-team="' + team + '" data-uuid="' + uuid + '">' + text + '</button>');
 };
+
+/* Create a <div> DOM element
+** @param:
+**    listOfElements - an array of elements to add to this div in order
+**    divClassName - the class name of this div element
+** @return: the reference of this element
+*/
 const createHtmlDiv = (listOfElements, divClassName) => {
   var tempDiv = $('<div class="' + divClassName + '">' + '</div>');
   for (let i = 0; i < listOfElements.length; i++) {
@@ -83,7 +143,21 @@ const createHtmlDiv = (listOfElements, divClassName) => {
   return tempDiv;
 };
 
-// 3. 动态生成一个比赛对阵卡
+/* Create a timetable card for one game, itself is also a div
+** @param:
+**    hostName - the name of the host team
+**    hostNameCN - the Chinese name of the host team
+**    hostFlag - the url to get the flag image of host team
+**    hostVote - the number of votes of host team
+**    guestName - the name of the guest team
+**    guestNameCN - the Chinese name of the guest team
+**    guestFlag - the url to get the flag image of guest team
+**    guestVote - the number of votes of guest team
+**    time - the start time of this game
+**    uuid - the unique id of this game
+**    expired - is this game ended or not, true if already ended.
+** @return: the reference of this element
+*/
 const createHtmlGameCard = (
   hostName,
   hostNameCN,
@@ -146,7 +220,10 @@ const createHtmlGameCard = (
   return cardDiv;
 };
 
-// 4. 添加或删除 某一天的比赛卡片
+/* Add the input cards to the timetable
+** @param:
+**    cardsOnOneDay - an array of game cards
+*/
 const addGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
   for(let i in cardsOnOneDay) {
     cardsOnOneDay[i].addClass('animated flipInX');
@@ -161,6 +238,11 @@ const addGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
     $('#myModal').modal('show');
   });
 };
+
+/* Remove the input cards to the timetable
+** @param:
+**    cardsOnOneDay - an array of game cards
+*/
 const removeGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
   for(let i in cardsOnOneDay) {
     cardsOnOneDay[i].removeClass('flipInX');
@@ -168,6 +250,9 @@ const removeGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
   }
 };
 
+/* Load all needed files
+** @param
+*/
 const preloadFiles = () => {
   var css_uefa = document.createElement('link');
   css_uefa.type = "text/css";
@@ -191,32 +276,28 @@ const preloadFiles = () => {
   $('#logo').append(createHtmlImg('//ooo.0o0.ooo/2016/06/15/57622884e73bb.png', 'logo'));
 };
 
-// 5. ajax callback functions
+/* Ajax get action's sucess callback function
+** @param:
+**    data - the data returned by the ajax request
+*/
 const getInfo = (data) => {
-  // 异步加载其它 js、css和图片
   preloadFiles();
   changeProgressBarValue(70);
 
-  // console.log(data);
   $('#date_1').text(dateString_1.substring(5));
   $('#date_2').text(dateString_2.substring(5));
   $('#date_3').text(dateString_3.substring(5));
   $('#date_4').text(dateString_4.substring(5));
   $('#date_5').text(dateString_5.substring(5));
 
-  // 如果至少有一场比赛，则设置投票modal窗口里的注册链接
   if(data.data.races.length > 0) {
     $('#modal-close').attr('href', data.data.races[0].register_url);
   }
-
-  // 设置html title
   $('title').first().text(data.data.title);
 
-  // 将卡片存储于cards
   for (var i = 0; i < data.data.races.length; i++) {
     var race = data.data.races[i];
-    // console.log(race.host.flag);
-    var expired = race.meta.expired; // 比赛是否过期
+    var expired = race.meta.expired;
     var tempCard = createHtmlGameCard(
       race.host.name,
       race.host.nameCN,
@@ -251,7 +332,6 @@ const getInfo = (data) => {
     }
   }
 
-  // 为没有赛事的date添加无赛事卡片
   for(var i in cards) {
     if(cards[i].length == 0) {
       cards[i].push(createHtmlP('无赛事', {
@@ -262,25 +342,31 @@ const getInfo = (data) => {
       }));
     }
   }
-  // 默认为今天的比赛
   addGameCardsOnOneDayInHtml(cards.date_3);
   changeProgressBarValue(100);
 
-  // 加载完毕后停顿1s，再显示content，防止意外发生，显示也更流畅
+  // After loading finished, show main content after 1 second
   window.setTimeout(() => {
     loadEnd();
   }, 1000);
 };
+
+/* Ajax post action's sucess callback function
+** @param:
+**    data - the data returned by the ajax request
+*/
 const postPhoneNumber = (data) => {
   if(data.errcode === undefined) {
     $('#wrongMsg').text('参与成功！');
     $('#wrongMsg').css('display', 'block');
-    // 投票成功后，过两秒关闭modal窗口
+
+    // vote success, close the modal window automatically after 2 seconds
     window.setTimeout(function() {
       $('#wrongMsg').css('display', 'none');
       $('#myModal').modal('hide');
     }, 2000);
-    // 改变已投场次的按钮样式，并disabled按钮
+
+    // style and disable the buttons of the voted game card
     $('.page0-timetable-game button').each(function(i) {
       if(this.dataset.uuid === uuid) {
         $(this).attr('disabled', 'disabled');
@@ -318,7 +404,6 @@ const postPhoneNumber = (data) => {
         errorMsg = "发生未知错误，请重新输入！";
         break;
     }
-    // console.log(errorMsg);
     $('#wrongMsg').text(errorMsg);
     $('#wrongMsg').css('display', 'block');
   }
@@ -327,25 +412,33 @@ const handleAjaxFail = (errorThrown) => {
   // TODO:
 };
 
-// 6. 加载完成，显示内容
+/* Hide progress-bar and show the main content when loading has finished
+** @param
+*/
 const loadEnd = () => {
   $('#preload-page').css('display', 'none');
   $('.container-wrapper').css('display', 'block');
 };
+
+/* Change the value of the progress-bar
+** @param:
+**    value - the value of the progress-bar to achieve
+*/
 const changeProgressBarValue = (value) => {
   var tempVal = value.toString();
   $('.progress-bar').attr('aria-valuenow', tempVal);
   $('.progress-bar').css('width', tempVal + '%');
 };
 
-// ***********
-// **程序开始**
-// ***********
+
+/*  ******************
+**  Main program begin
+**  ******************
+*/
 $(function() {
   // ajaxGet(reqUrl, getInfo, handleAjaxFail);
   ajaxGet(prefix + path, getInfo, handleAjaxFail);
 
-  // 设置5天的时间string，用于判断比赛日期
   switch (day) {
     case 29:
       dateString_1 = date.getFullYear().toString() + '-' + (date.getMonth()+1).toString() + '-' + (day-2).toString();
@@ -384,7 +477,7 @@ $(function() {
       break;
   }
 
-  // 监听日期栏点击事件，为了切换日期和比赛卡片
+  // Event listener for the top navigation bar to switch date
   $('.page0-date').on('click', function(event) {
     event.preventDefault();
     $('.page0-date').each(function() {
@@ -397,7 +490,8 @@ $(function() {
     addGameCardsOnOneDayInHtml(cards[$(this).attr('id')]);
   });
 
-  // 监听投票modal框事件
+  // Event listener for the vote modal window
+  // Use regular expression to test the phone number before making ajax request
   $('#join').on('click', function(event) {
     event.preventDefault();
     var phoneNumber = $('#userPhoneInput').val();
