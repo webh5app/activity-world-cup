@@ -6,11 +6,11 @@
 **  5. cards - the vote timetable cards of recent 5 days(date_3 is today)
 **  6. dateStrings - 5 strings that represent the date of recent 5 days, e.g. 2016-6-20
 */
-var prefix = 'http://10.124.18.115:8080/';
-// var prefix = '/';
+// var prefix = 'http://10.124.18.115:8080/';
+var prefix = '/';
 var path = 'api/v1/activity/worldcup/';
 var uuid;
-var reqUrl = '../api.json';
+// var reqUrl = '../api.json';
 var voteTeam;
 var cards = {
   date_1: [],
@@ -83,6 +83,20 @@ const ajaxPost = (url, data, success_cb, fail_cb) => {
   });
 };
 
+/* Generate a style string using the input style object
+** @param:
+**    style - a style object under the global styles variable
+** @return:
+**    a style string, which can be applied inside a HTML DOM tag
+*/
+const generateStyleString = (style) => {
+  var tempStyleString = '';
+  for(var key in style) {
+    tempStyleString = tempStyleString + key + ':' + style[key] + ';';
+  }
+  return tempStyleString;
+};
+
 /* Create a <p> DOM element
 ** @param:
 **    text - the inner text to write in it (<p>text</p>)
@@ -94,49 +108,73 @@ const createHtmlP = (text, style = undefined) => {
     return $('<p>' + text + '</p>');
   }
 
-  var styles = '';
-  for(var key in style) {
-    styles = styles + key + ':' + style[key] + ';';
-  }
-  return $('<p style="' + styles + '">' + text + '</p>');
+  const tempStyleString = generateStyleString(style);
+  return $('<p style="' + tempStyleString + '">' + text + '</p>');
 };
 
 /* Create a <img> DOM element
 ** @param:
 **    src - the source path of the image
 **    alt - the alternative text
+**    style - the css style applied to this element, dafault to undefined
 ** @return: the reference of this element
 */
-const createHtmlImg = (src, alt) => {
-  return $('<img alt="' + alt + '" src="' + src + '" />');
+const createHtmlImg = (src, alt, style = undefined) => {
+  var tempImg;
+  if(style === undefined) {
+    tempImg = $('<img alt="' + alt + '" src="' + src + '" />');
+  } else {
+    var tempStyleString = generateStyleString(style);
+    tempImg = $('<img alt="' + alt + '" src="' + src + '" style="' + tempStyleString + '" />');
+  }
+  return tempImg;
 };
 
 /* Create a <button> DOM element
 ** @param:
 **    text - the inner text to write in it (<button>text</button>)
-**    team - data-team mark in the tag to store the team name for voting purpose
-**    uuid - data0uuid mark in the tag to store the uuid of this game for voting purpose
-**    expired - if the game has ended, the value is true
+**    style - the css style applied to this element, dafault to undefined
+**    dataset - necessary info
+**      team - data-team mark in the tag to store the team name for voting purpose
+**      uuid - data-uuid mark in the tag to store the uuid of this game for voting purpose
+**      expired - if the game has ended, the value is true
 ** @return: the reference of this element
 */
-const createHtmlButton = (text, team, uuid, expired) => {
-  if(expired) {
-    var tempButton = $('<button data-team="' + team + '" data-uuid="' + uuid + '">已结束</button>');
+const createHtmlButton = (text, style = undefined, dataset = undefined) => {
+  var tempButton;
+  if(dataset.expired) {
+    text = '已结束';
+  }
+
+  if(style === undefined) {
+    tempButton = $('<button data-team="' + dataset.team + '" data-uuid="' + dataset.uuid + '">' + text + '</button>');
+  } else {
+    var tempStyleString = generateStyleString(style);
+    tempButton = $('<button data-team="' + dataset.team + '" data-uuid="' + dataset.uuid + '" style="' + tempStyleString + '">' + text + '</button>');
+  }
+  if(dataset.expired) {
     tempButton.attr('disabled', 'disabled');
     tempButton.css('background-color', '#95a5a6');
-    return tempButton;
   }
-  return $('<button data-team="' + team + '" data-uuid="' + uuid + '">' + text + '</button>');
+  return tempButton;
 };
 
 /* Create a <div> DOM element
 ** @param:
 **    listOfElements - an array of elements to add to this div in order
+**    style - the css style applied to this element, dafault to undefined
 **    divClassName - the class name of this div element
 ** @return: the reference of this element
 */
-const createHtmlDiv = (listOfElements, divClassName) => {
-  var tempDiv = $('<div class="' + divClassName + '">' + '</div>');
+const createHtmlDiv = (listOfElements, style = undefined, divClassName) => {
+  var tempDiv;
+  if(style === undefined) {
+    tempDiv = $('<div class="' + divClassName + '">' + '</div>');
+  } else {
+    var tempStyleString = generateStyleString(style);
+    tempDiv = $('<div class="' + divClassName + '" style="' + tempStyleString + '">' + '</div>');
+  }
+
   for (let i = 0; i < listOfElements.length; i++) {
     listOfElements[i].appendTo(tempDiv);
   }
@@ -171,51 +209,57 @@ const createHtmlGameCard = (
   uuid,
   expired
 ) => {
-  const hostTitleElement = createHtmlP(hostNameCN);
-  const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag');
-  const hostVoteNumber = createHtmlP(hostVote, {
-    'width': '100%',
-    'margin': '0'
+  const hostTitleElement = createHtmlP(hostNameCN, styles.gameCard.teamName);
+  const hostFlagElement = createHtmlImg(hostFlag, 'hostFLag', styles.gameCard.teamFlag);
+  const hostVoteNumber = createHtmlP(hostVote, styles.gameCard.vote.number);
+  const hostVoteNumberElement = createHtmlDiv([hostVoteNumber], styles.gameCard.vote.box, 'page0-gamecard-voteNumber');
+  const hostVoteButtonElement = createHtmlButton('胜', styles.gameCard.button.team, {
+    team: hostName,
+    uuid: uuid,
+    expired: expired,
   });
-  const hostVoteNumberElement = createHtmlDiv([hostVoteNumber], 'page0-gamecard-voteNumber');
-  const hostVoteButtonElement = createHtmlButton(hostNameCN+'胜', hostName, uuid, expired);
 
-  const guestTitleElement = createHtmlP(guestNameCN);
-  const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag');
-  const guestVoteNumber = createHtmlP(guestVote, {
-    'width': '100%',
-    'margin': '0'
+  const guestTitleElement = createHtmlP(guestNameCN, styles.gameCard.teamName);
+  const guestFlagElement = createHtmlImg(guestFlag, 'guestFLag', styles.gameCard.teamFlag);
+  const guestVoteNumber = createHtmlP(guestVote, styles.gameCard.vote.number);
+  const guestVoteNumberElement = createHtmlDiv([guestVoteNumber], styles.gameCard.vote.box, 'page0-gamecard-voteNumber');
+  const guestVoteButtonElement = createHtmlButton('胜', styles.gameCard.button.team, {
+    team: guestName,
+    uuid: uuid,
+    expired: expired,
   });
-  const guestVoteNumberElement = createHtmlDiv([guestVoteNumber], 'page0-gamecard-voteNumber');
-  const guestVoteButtonElement = createHtmlButton(guestNameCN+'胜', guestName, uuid, expired);
 
-  const pingVoteButtonElement = createHtmlButton('打平', 'ping', uuid, expired);
+  const pingVoteButtonElement = createHtmlButton('平', styles.gameCard.button.ping, {
+    team: 'ping',
+    uuid: uuid,
+    expired: expired,
+  });
 
   const leftDiv = createHtmlDiv([
     hostTitleElement,
     hostFlagElement,
     hostVoteNumberElement,
-    hostVoteButtonElement
-  ], 'page0-gamecard-left');
+    hostVoteButtonElement,
+  ], styles.gameCard.team, 'page0-gamecard-team');
 
   const midDiv = createHtmlDiv([
-    createHtmlP('vs'),
-    createHtmlP(time),
-    pingVoteButtonElement
-  ], 'page0-gamecard-mid');
+    createHtmlP('vs', styles.gameCard.vs),
+    createHtmlP(time, styles.gameCard.time),
+    pingVoteButtonElement,
+  ], styles.gameCard.midInfo, 'page0-gamecard-mid');
 
   const rightDiv = createHtmlDiv([
     guestTitleElement,
     guestFlagElement,
     guestVoteNumberElement,
-    guestVoteButtonElement
-  ], 'page0-gamecard-right');
+    guestVoteButtonElement,
+  ], styles.gameCard.team, 'page0-gamecard-team');
 
   const cardDiv = createHtmlDiv([
     leftDiv,
     midDiv,
-    rightDiv
-  ], 'page0-timetable-game');
+    rightDiv,
+  ], styles.gameTimeTable, 'page0-timetable-game');
 
   return cardDiv;
 };
@@ -229,7 +273,8 @@ const addGameCardsOnOneDayInHtml = (cardsOnOneDay) => {
     cardsOnOneDay[i].addClass('animated flipInX');
     $('.page0-timetable').append(cardsOnOneDay[i]);
   }
-  // 给投票按钮添加click事件监听
+
+  // Event listener for vote button
   $('.page0-timetable-game button').on('click', function(event) {
     event.preventDefault();
     voteTeam = this.dataset.team;
@@ -509,3 +554,99 @@ $(function() {
     }
   });
 });
+
+
+var styles = {
+  gameTimeTable: {
+    'width': '90%',
+    'height': 'auto',
+    'margin': 'auto',
+    'margin-top': '1rem',
+    'padding': '.5rem .6rem',
+    'display': 'flex',
+    'justify-content': 'space-around',
+    'align-items': 'center',
+    'background-color': '#efefef',
+    'border-radius': '3px',
+    'box-shadow': '0px 2px 4px rgba(0,0,0,.25)',
+  },
+  gameCard: {
+    team: {
+      'width': '30%',
+      'height': 'auto',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'align-items': 'center',
+      'color': '#27ae60',
+      'text-align': 'center',
+    },
+    teamName: {
+      'font-size': '.8rem',
+    },
+    teamFlag: {
+      'width': '85%',
+    },
+    vote: {
+      box: {
+        'width': '85%',
+        'height': 'auto',
+        'padding': '.1rem 0',
+        'margin-top': '.5rem',
+        'border': '2px solid #e74c3c',
+        'border-radius': '3px',
+        'color': '#e74c3c',
+        'font-size': '.7rem',
+      },
+      number: {
+        'width': '100%',
+        'margin': '0',
+      },
+    },
+    midInfo: {
+      'width': '30%',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'justify-content': 'space-between',
+      'font-size': '1.1rem',
+      'letter-spacing': '.1rem',
+      'text-align': 'center',
+    },
+    vs: {
+      'margin': '0',
+    },
+    time: {
+      'margin': '0',
+      'margin-top': '1rem',
+      'padding': '.1rem',
+      'color': '#fff',
+      'font-size': '.9rem',
+      'background-color': '#2ecc71',
+      'border-radius': '3px',
+    },
+    button: {
+      team: {
+        'width': '85%',
+        'padding': '.2rem',
+        'margin-top': '.5rem',
+        'outline': 'none',
+        'border': 'none',
+        'border-radius': '3px',
+        'background-color': '#3498db',
+        'color': '#fff',
+        'font-size': '.7rem',
+      },
+      ping: {
+        'width': '100%',
+        'padding': '.2rem',
+        'margin': 'auto',
+        'margin-top': '1rem',
+        'outline': 'none',
+        'border': 'none',
+        'border-radius': '3px',
+        'background-color': '#3498db',
+        'color': '#fff',
+        'font-size': '.7rem',
+      },
+    },
+  },
+};
